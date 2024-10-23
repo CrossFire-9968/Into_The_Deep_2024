@@ -9,10 +9,12 @@ import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 public class RobotManual extends OpMode {
     public Mecanum mecanum =  new Mecanum();
     public Blinkin blinkin = new Blinkin();
+    public ElevatorArm elevator = new ElevatorArm();
 
     public void init() {
         mecanum.init(hardwareMap);
         blinkin.init(hardwareMap);
+        elevator.init(hardwareMap);
     }
 
     @Override
@@ -20,7 +22,20 @@ public class RobotManual extends OpMode {
         mecanum.manualDrive(gamepad1, telemetry);
         if (gamepad1.square == true) {
             blinkin.setColor(RevBlinkinLedDriver.BlinkinPattern.GREEN);
+        }
+
+        if(gamepad2.dpad_up) {
+            elevator.liftRaise();
+            telemetry.addLine("liftRaise");
+        }
+        else if(gamepad2.dpad_down) {
+            elevator.liftLower();
+            telemetry.addLine("liftLower");
+        }
+        else{
+            elevator.liftPowerOff();
+            telemetry.addLine("liftPowerOff");
+        }
 
         telemetry.update();}
-    }
 }
