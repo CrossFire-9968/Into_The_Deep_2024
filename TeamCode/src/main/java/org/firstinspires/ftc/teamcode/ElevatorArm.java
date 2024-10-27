@@ -16,10 +16,10 @@ public class ElevatorArm {
 
     }
     public void liftRaise(){
-        elevator_Motor.setPower(0.3);
+        elevator_Motor.setPower(1.0);
     }
     public void liftLower() {
-        elevator_Motor.setPower(-0.3);
+        elevator_Motor.setPower(-1.0);
     }
     public void liftPowerOff(){
         elevator_Motor.setPower(0.0);
