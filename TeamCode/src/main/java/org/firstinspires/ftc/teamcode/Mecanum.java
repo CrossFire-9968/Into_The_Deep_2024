@@ -25,11 +25,11 @@ public class Mecanum {
         motor_LF.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         motor_RF = hwMap.get(DcMotor.class, "Motor_RF");
-        motor_RF.setDirection(DcMotorSimple.Direction.REVERSE);
+        motor_RF.setDirection(DcMotorSimple.Direction.FORWARD);
         motor_RF.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         motor_RR = hwMap.get(DcMotor.class, "Motor_RR");
-        motor_RR.setDirection(DcMotorSimple.Direction.REVERSE);
+        motor_RR.setDirection(DcMotorSimple.Direction.FORWARD);
         motor_RR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         motor_LR = hwMap.get(DcMotor.class, "Motor_LR");
@@ -45,7 +45,7 @@ public class Mecanum {
         double strafeSpeed = gamepad.right_trigger - gamepad.left_trigger;
 
         // Raw drive power for each motor from joystick inputs
-        LFrontPower = driveSpeed - turnSpeed - strafeSpeed;
+        LFrontPower = driveSpeed + turnSpeed + strafeSpeed;
         RFrontPower = driveSpeed + turnSpeed + strafeSpeed;
         RRearPower = driveSpeed + turnSpeed - strafeSpeed;
         LRearPower = driveSpeed - turnSpeed + strafeSpeed;
