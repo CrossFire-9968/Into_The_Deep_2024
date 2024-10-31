@@ -25,11 +25,11 @@ public class Mecanum {
         motor_LF.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         motor_RF = hwMap.get(DcMotor.class, "Motor_RF");
-        motor_RF.setDirection(DcMotorSimple.Direction.REVERSE);
+        motor_RF.setDirection(DcMotorSimple.Direction.FORWARD);
         motor_RF.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         motor_RR = hwMap.get(DcMotor.class, "Motor_RR");
-        motor_RR.setDirection(DcMotorSimple.Direction.REVERSE);
+        motor_RR.setDirection(DcMotorSimple.Direction.FORWARD);
         motor_RR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         motor_LR = hwMap.get(DcMotor.class, "Motor_LR");
