@@ -11,10 +11,13 @@ public class RobotManual extends OpMode {
     public Blinkin blinkin = new Blinkin();
     public ElevatorArm elevator = new ElevatorArm();
 
+    public Slide slide = new Slide();
+
     public void init() {
         mecanum.init(hardwareMap);
         blinkin.init(hardwareMap);
         elevator.init(hardwareMap);
+        slide.init(hardwareMap);
     }
 
     @Override
@@ -36,6 +39,7 @@ public class RobotManual extends OpMode {
             elevator.liftPowerOff();
             telemetry.addLine("liftPowerOff");
         }
+        if (gamep)
 
         telemetry.update();}
 }
