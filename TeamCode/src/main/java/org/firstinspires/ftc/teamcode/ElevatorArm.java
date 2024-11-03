@@ -14,7 +14,7 @@ public class ElevatorArm {
     public Servo Pivot_servo;
 
 
-    public void init(HardwareMap hwMap){
+    public void init(HardwareMap hwMap) {
         elevator_Motor = hwMap.get(DcMotor.class, "ElevatorMotor");
         elevator_Motor.setDirection(DcMotorSimple.Direction.REVERSE);
         //elevator_Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -29,31 +29,37 @@ public class ElevatorArm {
 
 
     }
-    public void liftRaise(){
+
+    public void liftRaise() {
         elevator_Motor.setPower(0.6);
     }
+
     public void liftLower() {
         elevator_Motor.setPower(-0.6);
     }
-    public void liftPowerOff(){
+
+    public void liftPowerOff() {
         elevator_Motor.setPower(0.0);
     }
 
-    public void Gripper_servo(Gamepad gamepad){
-        if (gamepad.left_bumper){
+    public void Gripper_servo(Gamepad gpad) {
+        if (gpad.left_bumper) {
             Gripper_servo.setPosition(30);
         }
 
-        if (gamepad.right_bumper){
+        if (gpad.right_bumper) {
             Gripper_servo.setPosition(120);
         }
+    }
 
-        if (gamepad.dpad_left){
+    public void Pivot_servo(Gamepad gpad) {
+        if (gpad.dpad_left) {
             Pivot_servo.setPosition(30);
         }
 
-        if (gamepad.dpad_right){
+        if (gpad.dpad_right) {
             Pivot_servo.setPosition(120);
         }
     }
 }
+

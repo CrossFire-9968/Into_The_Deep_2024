@@ -41,6 +41,7 @@ public class RobotManual extends OpMode {
             telemetry.addLine("liftPowerOff");
         }
 
+        elevator.Gripper_servo(gamepad2);
 
         telemetry.update();}
 }
