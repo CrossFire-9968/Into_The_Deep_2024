@@ -9,9 +9,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class ElevatorArm {
     public DcMotor elevator_Motor;
 
-    public Servo Gripper_servo
+    public Servo Gripper_servo;
 
-    public Servo Pivot_servo
+    public Servo Pivot_servo;
 
 
     public void init(HardwareMap hwMap){
@@ -41,8 +41,19 @@ public class ElevatorArm {
 
     public void Gripper_servo(Gamepad gamepad){
         if (gamepad.left_bumper){
-            Gripper_servo
+            Gripper_servo.setPosition(30);
         }
 
+        if (gamepad.right_bumper){
+            Gripper_servo.setPosition(120);
+        }
+
+        if (gamepad.dpad_left){
+            Pivot_servo.setPosition(30);
+        }
+
+        if (gamepad.dpad_right){
+            Pivot_servo.setPosition(120);
+        }
     }
 }
