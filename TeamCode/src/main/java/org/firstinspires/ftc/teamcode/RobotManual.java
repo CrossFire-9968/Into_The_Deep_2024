@@ -42,6 +42,6 @@ public class RobotManual extends OpMode {
         }
 
         elevator.Gripper_servo(gamepad2);
-
+        elevator.Pivot_servo(gamepad2);
         telemetry.update();}
 }
