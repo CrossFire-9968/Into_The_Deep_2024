@@ -15,13 +15,14 @@ public class ElevatorArm {
         elevator_Motor.setPower(0.0);
 
     }
-    public void liftRaise(){
-        elevator_Motor.setPower(0.6);
-    }
-    public void liftLower() {
-        elevator_Motor.setPower(-0.6);
-    }
-    public void liftPowerOff(){
-        elevator_Motor.setPower(0.0);
+
+    public void elevator_control(Gamepad gpad) {
+        if (gpad.dpad_up) {
+            elevator_Motor.setPower(0.6);
+        } else if (gpad.dpad_down) {
+            elevator_Motor.setPower(-0.6);
+        } else {
+            elevator_Motor.setPower(0.0);
+        }
     }
 }

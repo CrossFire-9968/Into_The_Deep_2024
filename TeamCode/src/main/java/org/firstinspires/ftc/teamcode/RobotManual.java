@@ -24,18 +24,8 @@ public class RobotManual extends OpMode {
             blinkin.setColor(RevBlinkinLedDriver.BlinkinPattern.GREEN);
         }
 
-        if(gamepad2.dpad_up) {
-            elevator.liftRaise();
-            telemetry.addLine("liftRaise");
-        }
-        else if(gamepad2.dpad_down) {
-            elevator.liftLower();
-            telemetry.addLine("liftLower");
-        }
-        else{
-            elevator.liftPowerOff();
-            telemetry.addLine("liftPowerOff");
-        }
+        // Raises and lowers the elevator
+        elevator.elevator_control(gamepad2);
 
         telemetry.update();}
 }
