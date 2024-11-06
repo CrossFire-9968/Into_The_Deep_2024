@@ -24,6 +24,7 @@ public class RobotManual extends OpMode {
     @Override
     public void loop() {
         mecanum.manualDrive(gamepad1, telemetry);
+
         if (gamepad1.square == true) {
             blinkin.setColor(RevBlinkinLedDriver.BlinkinPattern.GREEN);
         }
@@ -42,6 +43,7 @@ public class RobotManual extends OpMode {
         }
 
         elevator.Gripper_servo(gamepad2);
-        elevator.Pivot_servo(gamepad2);
-        telemetry.update();}
+//        elevator.Pivot_servo(gamepad2);
+        telemetry.update();
+    }
 }

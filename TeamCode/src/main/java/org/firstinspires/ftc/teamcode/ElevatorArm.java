@@ -11,7 +11,7 @@ public class ElevatorArm {
 
     public Servo Gripper_servo;
 
-    public Servo Pivot_servo;
+    //public Servo Pivot_servo;
 
 
     public void init(HardwareMap hwMap) {
@@ -22,10 +22,12 @@ public class ElevatorArm {
         elevator_Motor.setPower(0.0);
 
         Gripper_servo = hwMap.get(Servo.class, "Gripper_servo");
-        Gripper_servo.setDirection(Servo.Direction.FORWARD);
+     // Gripper_servo.setDirection(Servo.Direction.FORWARD);
+        Gripper_servo.setPosition(0.2);
 
-        Pivot_servo = hwMap.get(Servo.class, "Pivot_servo");
-        Pivot_servo.setDirection(Servo.Direction.FORWARD);
+
+//        Pivot_servo = hwMap.get(Servo.class, "Pivot_servo");
+//        Pivot_servo.setDirection(Servo.Direction.FORWARD);
 
 
     }
@@ -44,22 +46,22 @@ public class ElevatorArm {
 
     public void Gripper_servo(Gamepad gpad) {
         if (gpad.left_bumper) {
-            Gripper_servo.setPosition(30);
+            Gripper_servo.setPosition(0);
         }
 
         if (gpad.right_bumper) {
-            Gripper_servo.setPosition(120);
+            Gripper_servo.setPosition(50);
         }
     }
 
-    public void Pivot_servo(Gamepad gpad) {
-        if (gpad.dpad_left) {
-            Pivot_servo.setPosition(30);
-        }
-
-        if (gpad.dpad_right) {
-            Pivot_servo.setPosition(120);
-        }
-    }
+//    public void Pivot_servo(Gamepad gpad) {
+//        if (gpad.dpad_left) {
+//            Pivot_servo.setPosition(30);
+//        }
+//
+//        if (gpad.dpad_right) {
+//            Pivot_servo.setPosition(120);
+//        }
+    //}
 }
 
