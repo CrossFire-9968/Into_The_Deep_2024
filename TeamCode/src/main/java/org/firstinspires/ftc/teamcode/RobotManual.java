@@ -37,5 +37,6 @@ public class RobotManual extends OpMode {
             telemetry.addLine("liftPowerOff");
         }
 
+
         telemetry.update();}
 }
