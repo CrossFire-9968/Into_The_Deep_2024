@@ -36,13 +36,16 @@ public class Mecanum {
         motor_LR.setDirection(DcMotorSimple.Direction.FORWARD);
         motor_LR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        setAllMecanumPowers(0.0);
+        this.setAllMecanumPowers(0.0);
     }
 
-    public void manualDrive(Gamepad gamepad, Telemetry telemetry) {
-        double turnSpeed = gamepad.right_stick_x;
-        double driveSpeed = gamepad.left_stick_y;
-        double strafeSpeed = gamepad.right_trigger - gamepad.left_trigger;
+    public void manualDrive(Gamepad gpad, Telemetry telemetry) {
+        double turnSpeed = gpad.right_stick_x;
+        double driveSpeed = gpad.left_stick_y;
+        double strafeSpeed = gpad.right_trigger - gpad.left_trigger;
+
+        telemetry.addData("rTrigger: ", gpad.right_trigger);
+        telemetry.addData("lTrigger: ", gpad.left_trigger);
 
         // Raw drive power for each motor from joystick inputs
         LFrontPower = driveSpeed + turnSpeed + strafeSpeed;
