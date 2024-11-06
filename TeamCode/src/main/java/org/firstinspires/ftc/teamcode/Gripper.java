@@ -1,20 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 
-import androidx.annotation.NonNull;
-
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
-
 public class Gripper
 {
-   public DcMotor elevator_Motor;
    public Servo Gripper_servo;
-   //public Servo Pivot_servo;
-
    private double closedPosition;
    private double openPosition;
 
