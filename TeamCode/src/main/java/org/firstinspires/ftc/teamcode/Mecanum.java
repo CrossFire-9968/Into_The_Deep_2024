@@ -7,7 +7,8 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-public class Mecanum {
+public class Mecanum
+{
    public DcMotor motor_LR;
    public DcMotor motor_RR;
    public DcMotor motor_LF;
@@ -17,7 +18,8 @@ public class Mecanum {
    double RRearPower;
    double LRearPower;
 
-   public void init(HardwareMap hwMap){
+   public void init(HardwareMap hwMap)
+   {
       motor_LF = hwMap.get(DcMotor.class, "Motor_LF");
       motor_LF.setDirection(DcMotorSimple.Direction.FORWARD);
       motor_LF.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -37,7 +39,8 @@ public class Mecanum {
       this.setAllMecanumPowers(0.0);
    }
 
-   public void manualDrive(Gamepad gpad, Telemetry telemetry) {
+   public void manualDrive(Gamepad gpad, Telemetry telemetry)
+   {
       double turnSpeed = gpad.right_stick_x;
       double driveSpeed = gpad.left_stick_y;
       double strafeSpeed = gpad.right_trigger - gpad.left_trigger;
@@ -73,14 +76,16 @@ public class Mecanum {
    }
 
    // Set all mecanum powers
-   protected void setAllMecanumPowers(double power) {
+   protected void setAllMecanumPowers(double power)
+   {
       motor_LF.setPower(power);
       motor_RF.setPower(power);
       motor_RR.setPower(power);
       motor_LR.setPower(power);
    }
 
-   protected void setEachMecanumPower(double LFpower, double RFpower, double RRpower, double LRpower) {
+   protected void setEachMecanumPower(double LFpower, double RFpower, double RRpower, double LRpower)
+   {
       motor_LF.setPower(LFpower);
       motor_RF.setPower(RFpower);
       motor_RR.setPower(RRpower);

@@ -5,16 +5,17 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Gripper
 {
-   public Servo Gripper_servo;
+   public Servo gripper_servo;
    private double closedPosition;
    private double openPosition;
+   private String state;
 
-   public void init(HardwareMap hwMap)
+   public void init(HardwareMap hwMap, Blinkin blinkin)
    {
-      Gripper_servo = hwMap.get(Servo.class, "GripperServo");
-      Gripper_servo.setDirection(Servo.Direction.REVERSE);
+      gripper_servo = hwMap.get(Servo.class, "GripperServo");
+      gripper_servo.setDirection(Servo.Direction.REVERSE);
 
-      // Start with gripper closed so element is held for auto
+      // Start with gripper closed so element is held for autonomous
       this.close();
    }
 
@@ -30,11 +31,18 @@ public class Gripper
 
    public void close()
    {
-      Gripper_servo.setPosition(closedPosition);
+      gripper_servo.setPosition(closedPosition);
+      state = "Closed";
    }
 
    public void open()
    {
-      Gripper_servo.setPosition(openPosition);
+      gripper_servo.setPosition(openPosition);
+      state = "Open";
+   }
+
+   public String getState()
+   {
+      return state;
    }
 }
