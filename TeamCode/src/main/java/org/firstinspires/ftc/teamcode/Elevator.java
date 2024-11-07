@@ -17,9 +17,9 @@ public class Elevator
    private int topBucketPosition;
    private int bottomBucketPosition;
 
-   public static final double NEW_P = 5.0;
-   public static final double NEW_I = 0.5;
-   public static final double NEW_D = 0.3;
+   public static final double NEW_P = 6.0;
+   public static final double NEW_I = 0.3;
+   public static final double NEW_D = 0.2;
    public static final double NEW_F = 1.0;
    PIDFCoefficients pidfOrig;
    PIDFCoefficients pidfNew;

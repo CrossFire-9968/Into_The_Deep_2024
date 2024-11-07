@@ -11,16 +11,15 @@ public class RobotManual extends OpMode
    public Mecanum mecanum = new Mecanum();
    public Elevator elevator = new Elevator();
    public Gripper gripper = new Gripper();
-   public PIDtest pidTest = new PIDtest();
 
    public RobotManual()
    {
       elevator.setRaiseSpeed(1);
-      elevator.setLowerSpeed(-0.6);
-      elevator.setBottomBucketPosition(500);
-      elevator.setTopBucketPosition(1000);
-      gripper.setOpenPosition(0.8);
-      gripper.setClosedPosition(1.0);
+      elevator.setLowerSpeed(-0.7);
+      elevator.setBottomBucketPosition(750);
+      elevator.setTopBucketPosition(1300);
+      gripper.setOpenPosition(0.3);
+      gripper.setClosedPosition(0.7);
    }
 
    public void init()
