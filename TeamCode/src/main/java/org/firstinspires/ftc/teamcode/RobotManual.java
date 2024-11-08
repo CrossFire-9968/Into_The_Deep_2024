@@ -1,49 +1,66 @@
 package org.firstinspires.ftc.teamcode;
 
-import android.transition.Slide;
-
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 
 
 @TeleOp(name = "Robot Manual")
-public class RobotManual extends OpMode {
-    public Mecanum mecanum =  new Mecanum();
-    public Blinkin blinkin = new Blinkin();
-    public ElevatorArm elevator = new ElevatorArm();
+public class RobotManual extends OpMode
+{
+   public Blinkin blinkin = new Blinkin();
+   public Mecanum mecanum = new Mecanum();
+   public Elevator elevator = new Elevator();
+   public Gripper gripper = new Gripper();
 
-    public Slide slide = new Slide();
+   public void init()
+   {
+      blinkin.init(hardwareMap);
+      mecanum.init(hardwareMap);
+      elevator.init(hardwareMap);
+      gripper.init(hardwareMap, blinkin);
+   }
 
-    public void init() {
-        mecanum.init(hardwareMap);
-        blinkin.init(hardwareMap);
-        elevator.init(hardwareMap);
-    }
+   @Override
+   public void loop()
+   {
+      mecanum.manualDrive(gamepad1, telemetry);
 
-    @Override
-    public void loop() {
-        mecanum.manualDrive(gamepad1, telemetry);
+      // --- Manual elevator control ------------------
+      if (gamepad2.dpad_up) {
+         elevator.raiseManual();
+      }
+      else if (gamepad2.dpad_down) {
+         elevator.lowerManual();
+      }
+      else {
+         elevator.stop();
+      }
 
-        if (gamepad1.square == true) {
-            blinkin.setColor(RevBlinkinLedDriver.BlinkinPattern.GREEN);
-        }
+      // --- Encoder elevator control ------------------
+      if (gamepad2.triangle) {
+         elevator.toTopBucket();
+      }
+      else if (gamepad2.circle) {
+         elevator.toBottomBucket();
+      }
+      else if (gamepad2.cross) {
+         elevator.toHome();
+      }
 
-        if(gamepad2.dpad_up) {
-            elevator.liftRaise();
-            telemetry.addLine("liftRaise");
-        }
-        else if(gamepad2.dpad_down) {
-            elevator.liftLower();
-            telemetry.addLine("liftLower");
-        }
-        else{
-            elevator.liftPowerOff();
-            telemetry.addLine("liftPowerOff");
-        }
+      // --- Gripper control ------------------
+      if (gamepad2.left_bumper) {
+         gripper.close();
+         gamepad2.rumble(100);
+         blinkin.green();
+      }
+      else if (gamepad2.right_bumper) {
+         gripper.open();
+         blinkin.white();
+      }
 
-        elevator.Gripper_servo(gamepad2);
-//        elevator.Pivot_servo(gamepad2);
-        telemetry.update();
-    }
+      elevator.getElevatorTelemetry(telemetry);
+      telemetry.addData("Gripper State: ", gripper.getState());
+      mecanum.getMotorTelemetry(telemetry);
+      telemetry.update();
+   }
 }
