@@ -6,9 +6,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class Gripper
 {
    public Servo gripper_servo;
-   private double closedPosition;
-   private double openPosition;
    private String state;
+   private final double openPosition = 0.3;
+   private final double closedPosition = 0.7;
 
    public void init(HardwareMap hwMap, Blinkin blinkin)
    {
@@ -17,16 +17,6 @@ public class Gripper
 
       // Start with gripper closed so element is held for autonomous
       this.close();
-   }
-
-   public void setClosedPosition(double position)
-   {
-      this.closedPosition = position;
-   }
-
-   public void setOpenPosition(double position)
-   {
-      this.openPosition = position;
    }
 
    public void close()

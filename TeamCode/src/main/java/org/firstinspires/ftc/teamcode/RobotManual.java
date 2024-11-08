@@ -12,16 +12,6 @@ public class RobotManual extends OpMode
    public Elevator elevator = new Elevator();
    public Gripper gripper = new Gripper();
 
-   public RobotManual()
-   {
-      elevator.setRaiseSpeed(1);
-      elevator.setLowerSpeed(-0.7);
-      elevator.setBottomBucketPosition(750);
-      elevator.setTopBucketPosition(1300);
-      gripper.setOpenPosition(0.3);
-      gripper.setClosedPosition(0.7);
-   }
-
    public void init()
    {
       blinkin.init(hardwareMap);
