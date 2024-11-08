@@ -49,7 +49,7 @@ public class Mecanum
       telemetry.addData("lTrigger: ", gpad.left_trigger);
 
       // Raw drive power for each motor from joystick inputs
-      LFrontPower = driveSpeed + turnSpeed + strafeSpeed;
+      LFrontPower = driveSpeed - turnSpeed - strafeSpeed;
       RFrontPower = driveSpeed + turnSpeed + strafeSpeed;
       RRearPower = driveSpeed + turnSpeed - strafeSpeed;
       LRearPower = driveSpeed - turnSpeed + strafeSpeed;
@@ -90,5 +90,13 @@ public class Mecanum
       motor_RF.setPower(RFpower);
       motor_RR.setPower(RRpower);
       motor_LR.setPower(LRpower);
+   }
+
+   public void getMotorTelemetry(Telemetry telemetry)
+   {
+      telemetry.addData("LF Motor: ", LFrontPower);
+      telemetry.addData("RF Motor: ", RFrontPower);
+      telemetry.addData("RR Motor: ", RRearPower);
+      telemetry.addData("LR Motor: ", LRearPower);
    }
 }

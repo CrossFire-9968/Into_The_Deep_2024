@@ -70,6 +70,7 @@ public class RobotManual extends OpMode
 
       elevator.getElevatorTelemetry(telemetry);
       telemetry.addData("Gripper State: ", gripper.getState());
+      mecanum.getMotorTelemetry(telemetry);
       telemetry.update();
    }
 }
