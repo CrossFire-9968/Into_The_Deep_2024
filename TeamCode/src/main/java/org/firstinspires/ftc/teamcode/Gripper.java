@@ -7,8 +7,8 @@ public class Gripper
 {
    public Servo gripper_servo;
    private String state;
-   private final double openPosition = 0.3;
-   private final double closedPosition = 0.7;
+   private final double openPosition = 0.35;
+   private final double closedPosition = 0.8;
 
    public void init(HardwareMap hwMap, Blinkin blinkin)
    {
