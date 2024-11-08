@@ -23,7 +23,7 @@ public class ElevatorArm {
 
         Gripper_servo = hwMap.get(Servo.class, "Gripper_servo");
      // Gripper_servo.setDirection(Servo.Direction.FORWARD);
-        Gripper_servo.setPosition(0.2);
+        Gripper_servo.setPosition( 1);
 
 
 //        Pivot_servo = hwMap.get(Servo.class, "Pivot_servo");
