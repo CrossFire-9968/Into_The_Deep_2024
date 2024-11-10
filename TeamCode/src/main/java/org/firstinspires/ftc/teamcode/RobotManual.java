@@ -38,10 +38,13 @@ public class RobotManual extends OpMode
 
       // --- Encoder elevator control ------------------
       if (gamepad2.triangle) {
-         elevator.toTopBucket();
+         elevator.toLowRungPosition();
       }
       else if (gamepad2.circle) {
-         elevator.toBottomBucket();
+         elevator.toWallElementPosition();
+      }
+      else if (gamepad2.square) {
+         elevator.toHighRungPosition();
       }
       else if (gamepad2.cross) {
          elevator.toHome();
