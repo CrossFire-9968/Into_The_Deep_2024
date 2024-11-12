@@ -17,7 +17,7 @@ public class RobotManual extends OpMode
       blinkin.init(hardwareMap);
       mecanum.init(hardwareMap);
       elevator.init(hardwareMap);
-      gripper.init(hardwareMap, blinkin);
+      gripper.init(hardwareMap);
    }
 
    @Override
