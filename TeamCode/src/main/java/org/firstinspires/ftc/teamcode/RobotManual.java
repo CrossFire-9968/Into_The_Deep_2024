@@ -10,6 +10,7 @@ public class RobotManual extends OpMode
    public Blinkin blinkin = new Blinkin();
    public Mecanum mecanum = new Mecanum();
    public Elevator elevator = new Elevator();
+   public Pivot pivot = new Pivot();
    public Gripper gripper = new Gripper();
 
    public void init()
@@ -18,6 +19,7 @@ public class RobotManual extends OpMode
       mecanum.init(hardwareMap);
       elevator.init(hardwareMap);
       gripper.init(hardwareMap);
+      pivot.init(hardwareMap);
    }
 
    @Override
@@ -48,6 +50,14 @@ public class RobotManual extends OpMode
       }
       else if (gamepad2.cross) {
          elevator.toHome();
+      }
+
+      if (gamepad2.dpad_left) {
+         pivot.pivot_Down();
+      }
+
+      if (gamepad2.dpad_right) {
+         pivot.pivot_Up();
       }
 
       // --- Gripper control ------------------
