@@ -14,9 +14,9 @@ public class Elevator
    private DcMotor elevator_Motor;
    private static final double raiseSpeed = 1.0;
    private static final double lowerSpeed = -0.7;
-   private static final int wallElementPosition = 240;
+   private static final int HighBucketPosition = 2600;
    private static final int lowRungPosition = 440;
-   private static final int highRungPosition = 1517;
+   private static final int highRungPosition = 1225;
 
    // Motor PIDF coefficients, USE CAUTION. These values change how the motor
    // responds when commanded to an encoder position.
@@ -89,14 +89,14 @@ public class Elevator
 
    public void toWallElementPosition()
    {
-      if (this.getPosition() < wallElementPosition) {
+      if (this.getPosition() < HighBucketPosition) {
          elevator_Motor.setPower(raiseSpeed);
       }
       else {
          elevator_Motor.setPower(lowerSpeed);
       }
 
-      elevator_Motor.setTargetPosition(wallElementPosition);
+      elevator_Motor.setTargetPosition(HighBucketPosition);
       elevator_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
    }
 
