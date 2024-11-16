@@ -5,8 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name="Robot Auto Far Red")
-public class Auto_RedBucketStrafe extends LinearOpMode
+@Autonomous(name="RedObservPark")
+public class Auto_RedObservPark extends LinearOpMode
 {
     public Blinkin blinkin = new Blinkin();
     public MecanumAuto mecanumAuto = new MecanumAuto();
@@ -43,7 +43,7 @@ public class Auto_RedBucketStrafe extends LinearOpMode
     // Sequence of events for dropping the pixel on the center tape and then parking
     public void strafeToPark() {
         int countsToDriveOneInch = -33;         // Approximate encoder counts to drive 1 inch
-        int strafeToNet = 12;
+        int strafeToObserv = 36;
 
         // Drive to tape
 //        mecanumAuto.drive(-autoDrivePower, driveDistanceToPixel * countsToDriveOneInch);
@@ -51,7 +51,7 @@ public class Auto_RedBucketStrafe extends LinearOpMode
 //        sleep(autoStateDelay);
 
         // Strafe to go around pixel
-        mecanumAuto.strafe(-autoDrivePower, strafeToNet * countsToDriveOneInch);
+        mecanumAuto.strafe(-autoDrivePower, strafeToObserv * countsToDriveOneInch);
         waitForMotionToComplete();
         sleep(autoStateDelay);
 
