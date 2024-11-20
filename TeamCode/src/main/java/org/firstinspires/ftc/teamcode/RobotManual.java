@@ -11,19 +11,27 @@ public class RobotManual extends OpMode
    public Mecanum mecanum = new Mecanum();
    public Elevator elevator = new Elevator();
    public Gripper gripper = new Gripper();
+   public Color_Sensor colorSensor = new Color_Sensor();
 
-   public void init()
-   {
+   @Override
+   public void init() {
+
       blinkin.init(hardwareMap);
       mecanum.init(hardwareMap);
       elevator.init(hardwareMap);
       gripper.init(hardwareMap);
+      colorSensor.init(hardwareMap);
    }
+
+
+
+
 
    @Override
    public void loop()
    {
       mecanum.manualDrive(gamepad1, telemetry);
+      colorSensor.calculateHSL();
 
       // --- Manual elevator control ------------------
       if (gamepad2.dpad_up) {
@@ -54,15 +62,15 @@ public class RobotManual extends OpMode
       if (gamepad2.left_bumper) {
          gripper.close();
          gamepad2.rumble(100);
-         blinkin.green();
+//         blinkin.green();
       }
       else if (gamepad2.right_bumper) {
          gripper.open();
-         blinkin.white();
+//         blinkin.white();
       }
-
       elevator.getElevatorTelemetry(telemetry);
       telemetry.addData("Gripper State: ", gripper.getState());
+      telemetry.addData("Color Hue: ", colorSensor.getHue());
       mecanum.getMotorTelemetry(telemetry);
       telemetry.update();
    }
