@@ -16,7 +16,7 @@ public class Elevator
    private static final double lowerSpeed = -0.7;
    private static final int HighBucketPosition = 2600;
    private static final int lowRungPosition = 440;
-   private static final int highRungPosition = 1225;
+   private static final int highRungPosition = 1300;
 
    // Motor PIDF coefficients, USE CAUTION. These values change how the motor
    // responds when commanded to an encoder position.
