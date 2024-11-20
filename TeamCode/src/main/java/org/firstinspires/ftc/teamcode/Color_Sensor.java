@@ -55,6 +55,7 @@ public class Color_Sensor {
 
 
 
+
         // Calculate saturation value
         if (cmax == 0) {
             saturation = 0;
@@ -67,6 +68,7 @@ public class Color_Sensor {
     }
 
     public double getHue() {
+       calculateHSL();
         return hue;
     }
 }

@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -31,7 +32,23 @@ public class RobotManual extends OpMode
    public void loop()
    {
       mecanum.manualDrive(gamepad1, telemetry);
-      colorSensor.calculateHSL();
+      double hue = colorSensor.getHue();
+      if ((hue >= 70) && (hue <= 90)){
+         telemetry.addData("Yellow", hue);
+         blinkin.setColor(RevBlinkinLedDriver.BlinkinPattern.YELLOW);
+      }
+      else if ((hue >= 10) && (hue <= 30)){
+         telemetry.addData("Red", hue);
+         blinkin.setColor(RevBlinkinLedDriver.BlinkinPattern.RED);
+   }
+      else if ((hue >= 210) && (hue <= 230)){
+         telemetry.addData("Blue", hue);
+         blinkin.setColor(RevBlinkinLedDriver.BlinkinPattern.BLUE);
+      }
+      else {
+         telemetry.addData("Unknown", hue);
+         blinkin.setColor(RevBlinkinLedDriver.BlinkinPattern.GREEN);
+      }
 
       // --- Manual elevator control ------------------
       if (gamepad2.dpad_up) {
