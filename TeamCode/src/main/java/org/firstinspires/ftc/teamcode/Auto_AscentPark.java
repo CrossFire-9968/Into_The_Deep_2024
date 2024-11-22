@@ -5,10 +5,12 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name="RedAscentPark")
-public class Auto_RedAscentPark extends LinearOpMode
+@Autonomous(name="AscentPark")
+public class Auto_AscentPark extends LinearOpMode
 {
     public Blinkin blinkin = new Blinkin();
+    public Elevator elevator = new Elevator();
+    public Gripper gripper = new Gripper();
     public MecanumAuto mecanumAuto = new MecanumAuto();
     private ElapsedTime cameraTimer = new ElapsedTime();
     private long autoStateDelay = 300;
@@ -23,6 +25,8 @@ public class Auto_RedAscentPark extends LinearOpMode
         //-----------------------------------------------------------------------
         blinkin.init(hardwareMap);
         mecanumAuto.init(hardwareMap);
+        elevator.init(hardwareMap);
+        gripper.init(hardwareMap,blinkin);
         boolean isAutoComplete = false;
 
         // Init robot
@@ -47,7 +51,7 @@ public class Auto_RedAscentPark extends LinearOpMode
         int driveDistanceToAscent = 78;
         int rotateToAscent = -950;
 
-
+    
         //Drive to ascent
         mecanumAuto.drive(-autoDrivePower, driveDistanceToAscent * countsToDriveOneInch);
         waitForMotionToComplete();
@@ -58,15 +62,14 @@ public class Auto_RedAscentPark extends LinearOpMode
         waitForMotionToComplete();
         sleep(autoStateDelay);
 
+        // Raise arm to touch lower rung
+        elevator.toHighRungPosition();
+
         //rotate to ascent
         mecanumAuto.rotate(autoDrivePower,rotateToAscent);
         waitForMotionToComplete();
         sleep(autoStateDelay);
     }
-
-
-
-
 
     // Drive until one of the 4 wheels has reached it's target position. We only wait for one
     // because it is not guaranteed all 4 wheels will reach their target at the same time due
