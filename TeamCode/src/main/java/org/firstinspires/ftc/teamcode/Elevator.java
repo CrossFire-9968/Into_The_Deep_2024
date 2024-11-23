@@ -12,11 +12,12 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class Elevator
 {
    private DcMotor elevator_Motor;
-   private final double raiseSpeed = 1.0;
-   private final double lowerSpeed = -0.7;
-   private final int wallElementPosition = 240;
-   private final int lowRungPosition = 440;
-   private final int highRungPosition = 1517;
+   private static final double raiseSpeed = 1.0;
+   private static final double lowerSpeed = -0.7;
+   private static final int wallElementPosition = 240;
+   private static final int lowBucketPosition = 1600;
+   private static final int lowRungPosition = 440;
+   private static final int highRungPosition = 1400;
 
    // Motor PIDF coefficients, USE CAUTION. These values change how the motor
    // responds when commanded to an encoder position.
@@ -100,26 +101,39 @@ public class Elevator
       elevator_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
    }
 
+   public void toLowBucket()
+   {
+      if (this.getPosition() < lowBucketPosition) {
+         elevator_Motor.setPower(raiseSpeed);
+      }
+      else {
+         elevator_Motor.setPower(lowerSpeed);
+      }
+
+      elevator_Motor.setTargetPosition(lowBucketPosition);
+      elevator_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+   }
+
    public void toLowRungPosition()
    {
       if (this.getPosition() < lowRungPosition) {
-         elevator_Motor.setPower(this.raiseSpeed);
+         elevator_Motor.setPower(raiseSpeed);
       }
       else {
-         elevator_Motor.setPower(this.lowerSpeed);
+         elevator_Motor.setPower(lowerSpeed);
       }
 
-      elevator_Motor.setTargetPosition(this.lowRungPosition);
+      elevator_Motor.setTargetPosition(lowRungPosition);
       elevator_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
    }
 
    public void toHighRungPosition()
    {
       if (this.getPosition() < highRungPosition) {
-         elevator_Motor.setPower(this.raiseSpeed);
+         elevator_Motor.setPower(raiseSpeed);
       }
       else {
-         elevator_Motor.setPower(this.lowerSpeed);
+         elevator_Motor.setPower(lowerSpeed);
       }
 
       elevator_Motor.setTargetPosition(highRungPosition);
@@ -129,7 +143,7 @@ public class Elevator
    public void toHome()
    {
       int homePosition = 0;
-      elevator_Motor.setPower(this.lowerSpeed);
+      elevator_Motor.setPower(lowerSpeed);
       elevator_Motor.setTargetPosition(homePosition);
       elevator_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
    }

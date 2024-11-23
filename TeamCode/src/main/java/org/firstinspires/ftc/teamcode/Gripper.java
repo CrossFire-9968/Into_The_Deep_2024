@@ -7,10 +7,10 @@ public class Gripper
 {
    public Servo gripper_servo;
    private String state;
-   private final double openPosition = 0.35;
-   private final double closedPosition = 0.8;
+   private static final double openPosition = 0.4;
+   private static final double closedPosition = 0.78;
 
-   public void init(HardwareMap hwMap, Blinkin blinkin)
+   public void init(HardwareMap hwMap)
    {
       gripper_servo = hwMap.get(Servo.class, "GripperServo");
       gripper_servo.setDirection(Servo.Direction.REVERSE);
