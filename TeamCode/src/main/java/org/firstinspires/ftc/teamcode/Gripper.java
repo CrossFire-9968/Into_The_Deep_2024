@@ -8,7 +8,7 @@ public class Gripper
    public Servo gripper_servo;
    private String state;
    private static final double openPosition = 0.4;
-   private static final double closedPosition = 0.78;
+   private static final double closedPosition = 0.80;
 
    public void init(HardwareMap hwMap)
    {

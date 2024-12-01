@@ -11,6 +11,7 @@ public class Auto_ObservPark extends LinearOpMode
     public Blinkin blinkin = new Blinkin();
     public MecanumAuto mecanumAuto = new MecanumAuto();
     private ElapsedTime cameraTimer = new ElapsedTime();
+    public Gripper gripper = new Gripper();
     private long autoStateDelay = 300;
     private double autoDrivePower = 0.3;
 
@@ -23,6 +24,7 @@ public class Auto_ObservPark extends LinearOpMode
         //-----------------------------------------------------------------------
         blinkin.init(hardwareMap);
         mecanumAuto.init(hardwareMap);
+        gripper.init(hardwareMap);
         boolean isAutoComplete = false;
 
         // Init robot
