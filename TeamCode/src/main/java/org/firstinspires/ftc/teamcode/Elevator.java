@@ -11,13 +11,14 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Elevator
 {
-   private DcMotor elevator_Motor;
+   public DcMotor elevator_Motor;
    private static final double raiseSpeed = 1.0;
    private static final double lowerSpeed = -0.7;
    private static final int wallElementPosition = 240;
    private static final int lowBucketPosition = 1600;
    private static final int lowRungPosition = 440;
    private static final int highRungPosition = 1400;
+   private static final int highRungHookPosition = 950;
 
    // Motor PIDF coefficients, USE CAUTION. These values change how the motor
    // responds when commanded to an encoder position.
@@ -147,6 +148,13 @@ public class Elevator
       elevator_Motor.setTargetPosition(homePosition);
       elevator_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
    }
+
+   public void toHighRungHookPosition(){
+      elevator_Motor.setPower(lowerSpeed);
+      elevator_Motor.setTargetPosition(highRungHookPosition);
+      elevator_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+   }
+
 
    public void getElevatorTelemetry(Telemetry telemetry)
    {
