@@ -26,12 +26,14 @@ public class Auto_AscentPark extends LinearOpMode
         blinkin.init(hardwareMap);
         mecanumAuto.init(hardwareMap);
         elevator.init(hardwareMap);
-        gripper.init(hardwareMap,blinkin);
+        gripper.init(hardwareMap);
         boolean isAutoComplete = false;
 
         // Init robot
         mecanumAuto.setAllMecanumPowers(0.0);
-        blinkin.setColor(RevBlinkinLedDriver.BlinkinPattern.VIOLET);
+        gripper.init(hardwareMap);
+
+        //blinkin.setColor(RevBlinkinLedDriver.BlinkinPattern.VIOLET)
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -50,7 +52,7 @@ public class Auto_AscentPark extends LinearOpMode
         int strafeToAscent = 12;
         int driveDistanceToAscent = 78;
         int rotateToAscent = -950;
-
+        int driveToBar = 4;
     
         //Drive to ascent
         mecanumAuto.drive(-autoDrivePower, driveDistanceToAscent * countsToDriveOneInch);
@@ -69,6 +71,12 @@ public class Auto_AscentPark extends LinearOpMode
         mecanumAuto.rotate(autoDrivePower,rotateToAscent);
         waitForMotionToComplete();
         sleep(autoStateDelay);
+
+        //Drive to ascent
+        mecanumAuto.drive(-autoDrivePower, driveToBar * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoStateDelay);
+
     }
 
     // Drive until one of the 4 wheels has reached it's target position. We only wait for one
