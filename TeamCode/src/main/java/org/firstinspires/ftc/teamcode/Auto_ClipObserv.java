@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous(name="AutoClip")
-public class Auto_Clip extends LinearOpMode
+public class Auto_ClipObserv extends LinearOpMode
 {
     public Blinkin blinkin = new Blinkin();
     public Elevator elevator = new Elevator();
@@ -14,7 +14,7 @@ public class Auto_Clip extends LinearOpMode
     public MecanumAuto mecanumAuto = new MecanumAuto();
     private ElapsedTime cameraTimer = new ElapsedTime();
     private long autoStateDelay = 300;
-    private double autoDrivePower = 0.3;
+    private double autoDrivePower = 0.5;
 
     @Override
     public void runOpMode() throws InterruptedException
@@ -55,69 +55,85 @@ public class Auto_Clip extends LinearOpMode
         int driveToRung = 28;
         int driveToClip = 8;
         int backToWall = -12;
-        int oneSecondDelay = 1000;
+        int strafeToObserv = 48;
+        int driveToSample = 45;
+        int strafeToSample = 18;
+        int backSample = -63;
+        int nextSample = 63;
+        int strafeNextSample = 12;
+        int autoDelay = 500;
 
         mecanumAuto.drive(-autoDrivePower, driveToRung * countsToDriveOneInch);
         waitForMotionToComplete();
-        sleep(oneSecondDelay);
+        sleep(autoDelay);
 
         mecanumAuto.strafe(autoDrivePower,strafeToCenter * countsToDriveOneInch);
         waitForMotionToComplete();
-        sleep(oneSecondDelay);
+        sleep(autoDelay);
 
         elevator.toHighRungPosition();
         waitForElevatorToStop();
-        sleep(oneSecondDelay);
+        sleep(autoDelay);
 
         mecanumAuto.drive(-autoDrivePower, driveToClip * countsToDriveOneInch);
         waitForMotionToComplete();
-        sleep(oneSecondDelay);
+        sleep(autoDelay);
 
         elevator.toHighRungHookPosition();
         waitForElevatorToStop();
         sleep(300);
 
         gripper.open();
-        sleep(oneSecondDelay);
+        sleep(autoDelay);
 
         mecanumAuto.drive(-autoDrivePower, backToWall * countsToDriveOneInch);
         waitForMotionToComplete();
-        sleep(oneSecondDelay);
+        sleep(autoDelay);
 
         elevator.toHome();
         waitForElevatorToStop();
-        sleep(oneSecondDelay);
-    }
+        sleep(autoDelay);
 
-    public void parkInAscent() {
-        int countsToDriveOneInch = -33;         // Approximate encoder counts to drive 1 inch
-        int strafeToAscent = 12;
-        int driveDistanceToAscent = 78;
-        int rotateToAscent = -950;
-        int driveToBar = 4;
-
-        //Drive to ascent
-        mecanumAuto.drive(-autoDrivePower, driveDistanceToAscent * countsToDriveOneInch);
+        // Strafe to grab sample
+        mecanumAuto.strafe(-autoDrivePower, strafeToObserv * countsToDriveOneInch);
         waitForMotionToComplete();
-        sleep(autoStateDelay);
+        sleep(autoDelay);
 
-        // Strafe to go to ascent
-        mecanumAuto.strafe(-autoDrivePower, strafeToAscent * countsToDriveOneInch);
+        mecanumAuto.drive(-autoDrivePower, driveToSample * countsToDriveOneInch);
         waitForMotionToComplete();
-        sleep(autoStateDelay);
+        sleep(autoDelay);
 
-        // Raise arm to touch lower rung
-        elevator.toHighRungPosition();
-
-        //rotate to ascent
-        mecanumAuto.rotate(autoDrivePower,rotateToAscent);
+        mecanumAuto.strafe(-autoDrivePower, strafeToSample * countsToDriveOneInch);
         waitForMotionToComplete();
-        sleep(autoStateDelay);
+        sleep(autoDelay);
 
-        //Drive to ascent
-        mecanumAuto.drive(-autoDrivePower, driveToBar * countsToDriveOneInch);
+        mecanumAuto.drive(-autoDrivePower, backSample * countsToDriveOneInch);
         waitForMotionToComplete();
-        sleep(autoStateDelay);
+        sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, nextSample * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.strafe(-autoDrivePower, strafeNextSample * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, backSample * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, nextSample * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.strafe(-autoDrivePower, strafeNextSample * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, backSample * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
 
     }
 
