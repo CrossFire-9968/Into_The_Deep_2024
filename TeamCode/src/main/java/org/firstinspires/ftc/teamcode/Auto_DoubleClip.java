@@ -13,7 +13,7 @@ public class Auto_DoubleClip extends LinearOpMode {
     public MecanumAuto mecanumAuto = new MecanumAuto();
     private ElapsedTime cameraTimer = new ElapsedTime();
     private long autoStateDelay = 300;
-    private double autoDrivePower = 0.8;
+    private double autoDrivePower = 0.5;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -60,11 +60,11 @@ public class Auto_DoubleClip extends LinearOpMode {
         int rotateToSub = 1800;
         int strafeToPark = 45;
         int backToPark = 22;
-        int autoDelay = 500;
+        int autoDelay = 250;
 
         mecanumAuto.drive(-autoDrivePower, driveToRung * countsToDriveOneInch);
         waitForMotionToComplete();
-        //sleep(autoDelay);
+        sleep(autoDelay);
 
 //        mecanumAuto.strafe(autoDrivePower, strafeToCenter * countsToDriveOneInch);
 //        waitForMotionToComplete();
@@ -72,12 +72,12 @@ public class Auto_DoubleClip extends LinearOpMode {
 
         elevator.toHighRungPosition();
         waitForElevatorToStop();
-        //sleep(autoDelay);
+        sleep(autoDelay);
 
 
         mecanumAuto.drive(-autoDrivePower, driveToClip * countsToDriveOneInch);
         waitForMotionToComplete();
-        //sleep(autoDelay);
+        sleep(autoDelay);
 
         elevator.toHighRungHookPosition();
         waitForElevatorToStop();
@@ -96,11 +96,11 @@ public class Auto_DoubleClip extends LinearOpMode {
 
         mecanumAuto.strafe(-autoDrivePower, strafeNextSpecimen * countsToDriveOneInch);
         waitForMotionToComplete();
-        //sleep(autoDelay);
+        sleep(autoDelay);
 
         mecanumAuto.rotate(-autoDrivePower, rotateToSample);
         waitForMotionToComplete();
-        //sleep(autoDelay);
+        sleep(autoDelay);
 
         mecanumAuto.drive(-autoDrivePower, driveToSpecimen * countsToDriveOneInch);
         waitForMotionToComplete();
@@ -119,15 +119,15 @@ public class Auto_DoubleClip extends LinearOpMode {
 
         mecanumAuto.drive(-autoDrivePower, -driveToNextClip * countsToDriveOneInch);
         waitForMotionToComplete();
-       // sleep(autoDelay);
+        sleep(autoDelay);
 
         mecanumAuto.strafe(-autoDrivePower, strafe2ndClip * countsToDriveOneInch);
         waitForMotionToComplete();
-       // sleep(autoDelay);
+        sleep(autoDelay);
 
        mecanumAuto.rotate(-autoDrivePower, -rotateToSub);
         waitForMotionToComplete();
-       // sleep(autoDelay);
+        sleep(autoDelay);
 
         elevator.toHighRungPosition();
         waitForElevatorToStop();
@@ -135,7 +135,7 @@ public class Auto_DoubleClip extends LinearOpMode {
 
         mecanumAuto.drive(-autoDrivePower, 9 * countsToDriveOneInch);
         waitForMotionToComplete();
-       // sleep(autoDelay);
+        sleep(autoDelay);
 
         elevator.toHighRungHookPosition();
         waitForElevatorToStop();
@@ -146,18 +146,18 @@ public class Auto_DoubleClip extends LinearOpMode {
 
         mecanumAuto.drive(-autoDrivePower, -8 *countsToDriveOneInch);
         waitForMotionToComplete();
-       // sleep(autoDelay);
+        sleep(autoDelay);
 
         elevator.toHome();
         waitForElevatorToStop();
 
         mecanumAuto.strafe(-autoDrivePower, strafeToPark * countsToDriveOneInch);
         waitForMotionToComplete();
-        //sleep(autoDelay);
+        sleep(autoDelay);
 
         mecanumAuto.drive(-autoDrivePower, -backToPark * countsToDriveOneInch);
         waitForMotionToComplete();
-        //sleep(autoDelay);
+        sleep(autoDelay);
     }
 
     // Drive until one of the 4 wheels has reached it's target position. We only wait for one
