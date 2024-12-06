@@ -13,7 +13,7 @@ public class Auto_DoubleClip extends LinearOpMode {
     public MecanumAuto mecanumAuto = new MecanumAuto();
     private ElapsedTime cameraTimer = new ElapsedTime();
     private long autoStateDelay = 300;
-    private double autoDrivePower = 0.7;
+    private double autoDrivePower = 0.8;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -49,29 +49,22 @@ public class Auto_DoubleClip extends LinearOpMode {
 
     public void clipSpecimen() {
         int countsToDriveOneInch = -33; // Approximate encoder counts to drive 1 inch
-        int strafeToCenter = -14;
         int driveToRung = 26;
         int driveToClip = 8;
         int strafeNextSpecimen = 48;
         int rotateToSample = 1900;
-        int driveToSpecimen = 26;
-        int driveToNextClip = 24;
+        int driveToSpecimen = 21;
+        int driveToGrab = 4;
+        int driveToNextClip = 22;
         int strafe2ndClip = 55;
-        int rotateToSub = 1900;
-        int strafeToPark = 38;
+        int rotateToSub = 1800;
+        int strafeToPark = 45;
         int backToPark = 22;
-        int backToWall = -12;
-        int strafeToObserv = 48;
-        int driveToSample = 45;
-        int strafeToSample = 18;
-        int backSample = -63;
-        int nextSample = 63;
-        int strafeNextSample = 12;
         int autoDelay = 500;
 
         mecanumAuto.drive(-autoDrivePower, driveToRung * countsToDriveOneInch);
         waitForMotionToComplete();
-        sleep(autoDelay);
+        //sleep(autoDelay);
 
 //        mecanumAuto.strafe(autoDrivePower, strafeToCenter * countsToDriveOneInch);
 //        waitForMotionToComplete();
@@ -79,11 +72,12 @@ public class Auto_DoubleClip extends LinearOpMode {
 
         elevator.toHighRungPosition();
         waitForElevatorToStop();
-        sleep(autoDelay);
+        //sleep(autoDelay);
+
 
         mecanumAuto.drive(-autoDrivePower, driveToClip * countsToDriveOneInch);
         waitForMotionToComplete();
-        sleep(autoDelay);
+        //sleep(autoDelay);
 
         elevator.toHighRungHookPosition();
         waitForElevatorToStop();
@@ -98,22 +92,26 @@ public class Auto_DoubleClip extends LinearOpMode {
 
         elevator.toHome();
         waitForElevatorToStop();
-        sleep(autoDelay);
+        //sleep(autoDelay);
 
         mecanumAuto.strafe(-autoDrivePower, strafeNextSpecimen * countsToDriveOneInch);
         waitForMotionToComplete();
-        sleep(autoDelay);
+        //sleep(autoDelay);
 
         mecanumAuto.rotate(-autoDrivePower, rotateToSample);
         waitForMotionToComplete();
-        sleep(autoDelay);
+        //sleep(autoDelay);
 
         mecanumAuto.drive(-autoDrivePower, driveToSpecimen * countsToDriveOneInch);
         waitForMotionToComplete();
-        sleep(autoDelay);
+        sleep(1000);
+
+        mecanumAuto.drive(-autoDrivePower, driveToGrab * countsToDriveOneInch);
+        waitForMotionToComplete();
+//        sleep(autoDelay);
 
         gripper.close();
-        sleep(autoDelay);
+        sleep(1000);
 
         elevator.toLowRungPosition();
         waitForElevatorToStop();
@@ -121,45 +119,45 @@ public class Auto_DoubleClip extends LinearOpMode {
 
         mecanumAuto.drive(-autoDrivePower, -driveToNextClip * countsToDriveOneInch);
         waitForMotionToComplete();
-        sleep(autoDelay);
+       // sleep(autoDelay);
 
         mecanumAuto.strafe(-autoDrivePower, strafe2ndClip * countsToDriveOneInch);
         waitForMotionToComplete();
-        sleep(autoDelay);
+       // sleep(autoDelay);
 
        mecanumAuto.rotate(-autoDrivePower, -rotateToSub);
         waitForMotionToComplete();
-        sleep(autoDelay);
+       // sleep(autoDelay);
 
         elevator.toHighRungPosition();
         waitForElevatorToStop();
-        sleep(autoDelay);
+        //sleep(autoDelay);
 
         mecanumAuto.drive(-autoDrivePower, 9 * countsToDriveOneInch);
         waitForMotionToComplete();
-        sleep(autoDelay);
+       // sleep(autoDelay);
 
         elevator.toHighRungHookPosition();
         waitForElevatorToStop();
         //sleep(200);
 
         gripper.open();
-        sleep(autoDelay);
+//        sleep(autoDelay);
 
         mecanumAuto.drive(-autoDrivePower, -8 *countsToDriveOneInch);
         waitForMotionToComplete();
-        sleep(autoDelay);
+       // sleep(autoDelay);
 
         elevator.toHome();
         waitForElevatorToStop();
 
         mecanumAuto.strafe(-autoDrivePower, strafeToPark * countsToDriveOneInch);
         waitForMotionToComplete();
-        sleep(autoDelay);
+        //sleep(autoDelay);
 
         mecanumAuto.drive(-autoDrivePower, -backToPark * countsToDriveOneInch);
         waitForMotionToComplete();
-        sleep(autoDelay);
+        //sleep(autoDelay);
     }
 
     // Drive until one of the 4 wheels has reached it's target position. We only wait for one
