@@ -18,13 +18,13 @@ public class Elevator
    private static final int lowBucketPosition = 1600;
    private static final int lowRungPosition = 440;
    private static final int highRungPosition = 1375;
-   private static final int highRungHookPosition = 950;
+   private static final int highRungHookPosition = 975;
 
    // Motor PIDF coefficients, USE CAUTION. These values change how the motor
    // responds when commanded to an encoder position.
-   public static final double NEW_P = 6.0;
-   public static final double NEW_I = 0.3;
-   public static final double NEW_D = 0.2;
+   public static final double NEW_P = 10.0;
+   public static final double NEW_I = 0.75;
+   public static final double NEW_D = 0.1;
    public static final double NEW_F = 1.0;
    PIDFCoefficients pidfNew;
    PIDFCoefficients pidCheck;
