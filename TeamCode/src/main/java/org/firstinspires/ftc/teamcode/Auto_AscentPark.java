@@ -10,7 +10,7 @@ public class Auto_AscentPark extends LinearOpMode
 {
     public Blinkin blinkin = new Blinkin();
     public Elevator elevator = new Elevator();
-    public Gripper gripper = new Gripper();
+   // public Gripper gripper = new Gripper();
     public MecanumAuto mecanumAuto = new MecanumAuto();
     private ElapsedTime cameraTimer = new ElapsedTime();
     private long autoStateDelay = 300;

@@ -10,8 +10,10 @@ public class RobotManual extends OpMode
    public Blinkin blinkin = new Blinkin();
    public Mecanum mecanum = new Mecanum();
    public Elevator elevator = new Elevator();
-   public Gripper gripper = new Gripper();
+   public Ascent gripper = new Ascent();
    public Pivot pivot = new Pivot();
+
+   public Ascent ascent = new Gripper
 
    public void init()
    {
@@ -70,6 +72,10 @@ public class RobotManual extends OpMode
 
       if (gamepad2.dpad_left) {
          pivot.pivot_Up();
+      }
+
+      if (gamepad1.dpad_up){
+         Ascent.ascentRaise
       }
 
       elevator.getElevatorTelemetry(telemetry);
