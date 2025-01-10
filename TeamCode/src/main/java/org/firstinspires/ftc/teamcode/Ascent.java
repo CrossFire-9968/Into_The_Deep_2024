@@ -25,7 +25,7 @@ public class Ascent {
         Pulley_Motor_L.setDirection(DcMotor.Direction.FORWARD);
 
 
-        Pulley_Motor_R = hwMap.get(DcMotor.class, "PulleyMotorL");
+        Pulley_Motor_R = hwMap.get(DcMotor.class, "PulleyMotorR");
         Pulley_Motor_R.setDirection(DcMotor.Direction.FORWARD);
 
     }

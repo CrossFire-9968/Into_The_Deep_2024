@@ -76,6 +76,7 @@ public class RobotManual extends OpMode
          pivot.pivot_Up();
       }
 
+      // --- Ascent control ------------------
       if (gamepad1.dpad_up) {
          ascent.ascentRaise();
       }
@@ -88,7 +89,7 @@ public class RobotManual extends OpMode
          ascent.ascentPull();
       }
 
-     else  if (gamepad1.dpad_right) {
+     else if (gamepad1.dpad_right) {
          ascent.ascentUnwind();
       }
 
