@@ -13,6 +13,8 @@ public class RobotManual extends OpMode
    public Gripper gripper = new Gripper();
    public Pivot pivot = new Pivot();
 
+   public Ascent ascent = new Ascent();
+
    public void init()
    {
       blinkin.init(hardwareMap);
@@ -20,6 +22,7 @@ public class RobotManual extends OpMode
       elevator.init(hardwareMap);
       gripper.init(hardwareMap);
       pivot.init(hardwareMap);
+      ascent.init(hardwareMap);
    }
 
    @Override
@@ -71,6 +74,30 @@ public class RobotManual extends OpMode
       if (gamepad2.dpad_left) {
          pivot.pivot_Up();
       }
+
+      // --- Ascent arm control ------------------
+      if (gamepad1.dpad_up) {
+         ascent.ascentArmRaise();
+      }
+      else if (gamepad1.dpad_down) {
+         ascent.ascentArmLower();
+      }
+      else{
+         ascent.ascentArmIdle();
+      }
+
+      // --- Ascent pulley control ------------------
+     if (gamepad1.dpad_left) {
+         ascent.ascentPulleyRaise();
+      }
+
+     else if (gamepad1.dpad_right) {
+         ascent.ascentPulleyLower();
+      }
+      else {
+         ascent.ascentPulleyIdle();
+      }
+
 
       elevator.getElevatorTelemetry(telemetry);
       telemetry.addData("Gripper State: ", gripper.getState());
