@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.Gamepad;
 
 
 @TeleOp(name = "Robot Manual")
@@ -13,6 +14,8 @@ public class RobotManual extends OpMode
    public Gripper gripper = new Gripper();
    public Pivot pivot = new Pivot();
 
+   public Ascent ascent = new Ascent();
+
    public void init()
    {
       blinkin.init(hardwareMap);
@@ -20,6 +23,7 @@ public class RobotManual extends OpMode
       elevator.init(hardwareMap);
       gripper.init(hardwareMap);
       pivot.init(hardwareMap);
+      ascent.init(hardwareMap);
    }
 
    @Override
@@ -71,6 +75,27 @@ public class RobotManual extends OpMode
       if (gamepad2.dpad_left) {
          pivot.pivot_Up();
       }
+
+      if (gamepad1.dpad_up) {
+         ascent.ascentRaise();
+      }
+
+      else if (gamepad1.dpad_down) {
+         ascent.ascentLower();
+      }
+
+     else if (gamepad1.dpad_left) {
+         ascent.ascentPull();
+      }
+
+     else  if (gamepad1.dpad_right) {
+         ascent.ascentUnwind();
+      }
+
+      else {
+         ascent.ascentIdle();
+      }
+
 
       elevator.getElevatorTelemetry(telemetry);
       telemetry.addData("Gripper State: ", gripper.getState());
