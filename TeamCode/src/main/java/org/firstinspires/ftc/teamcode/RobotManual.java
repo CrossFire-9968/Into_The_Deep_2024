@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.Gamepad;
 
 
 @TeleOp(name = "Robot Manual")
@@ -50,7 +49,7 @@ public class RobotManual extends OpMode
          elevator.toLowRungPosition();
       }
       else if (gamepad2.square) {
-         elevator.toLowBucket();
+         elevator.toHighBucket();
       }
       else if (gamepad2.cross) {
          elevator.toHome();
@@ -76,24 +75,27 @@ public class RobotManual extends OpMode
          pivot.pivot_Up();
       }
 
+      // --- Ascent arm control ------------------
       if (gamepad1.dpad_up) {
-         ascent.ascentRaise();
+         ascent.ascentArmRaise();
       }
-
       else if (gamepad1.dpad_down) {
-         ascent.ascentLower();
+         ascent.ascentArmLower();
+      }
+      else{
+         ascent.ascentArmIdle();
       }
 
-     else if (gamepad1.dpad_left) {
-         ascent.ascentPull();
+      // --- Ascent pulley control ------------------
+     if (gamepad1.dpad_left) {
+         ascent.ascentPulleyRaise();
       }
 
-     else  if (gamepad1.dpad_right) {
-         ascent.ascentUnwind();
+     else if (gamepad1.dpad_right) {
+         ascent.ascentPulleyLower();
       }
-
       else {
-         ascent.ascentIdle();
+         ascent.ascentPulleyIdle();
       }
 
 

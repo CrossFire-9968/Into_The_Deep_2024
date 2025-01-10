@@ -2,10 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-
-import org.json.JSONArray;
 
 public class Ascent {
     public CRServo Ascent_Servo;
@@ -25,34 +22,36 @@ public class Ascent {
         Pulley_Motor_L.setDirection(DcMotor.Direction.FORWARD);
 
 
-        Pulley_Motor_R = hwMap.get(DcMotor.class, "PulleyMotorL");
+        Pulley_Motor_R = hwMap.get(DcMotor.class, "PulleyMotorR");
         Pulley_Motor_R.setDirection(DcMotor.Direction.FORWARD);
 
     }
 
-
-    public void ascentPull() {
-        Pulley_Motor_L.setPower(1);
-        Pulley_Motor_R.setPower(1);
-    }
-
-    public void ascentRaise() {
-        Ascent_Servo.setPower(1);
-    }
-
-    public void ascentLower() {
+    public void ascentArmRaise() {
         Ascent_Servo.setPower(-1);
     }
 
-    public void ascentIdle() {
+    public void ascentArmLower() {
+        Ascent_Servo.setPower(1);
+    }
+
+    public void ascentArmIdle() {
         Ascent_Servo.setPower(0);
+    }
+
+    public void ascentPulleyIdle() {
         Pulley_Motor_L.setPower(0);
         Pulley_Motor_R.setPower(0);
     }
 
-    public void ascentUnwind() {
+    public void ascentPulleyLower() {
         Pulley_Motor_L.setPower(-1);
         Pulley_Motor_R.setPower(-1);
+    }
+
+    public void ascentPulleyRaise() {
+        Pulley_Motor_L.setPower(1);
+        Pulley_Motor_R.setPower(1);
     }
 }
 
