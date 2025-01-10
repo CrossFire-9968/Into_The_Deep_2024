@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name="AutoClip")
+@Autonomous(name="AutoSingleClip")
 public class Auto_ClipObserv extends LinearOpMode
 {
     public Blinkin blinkin = new Blinkin();
@@ -52,7 +52,7 @@ public class Auto_ClipObserv extends LinearOpMode
     public void clipSpecimen() {
         int countsToDriveOneInch = -33; // Approximate encoder counts to drive 1 inch
         int strafeToCenter = -14;
-        int driveToRung = 28;
+        int driveToRung = 26;
         int driveToClip = 8;
         int backToWall = -12;
         int strafeToObserv = 48;
@@ -66,10 +66,10 @@ public class Auto_ClipObserv extends LinearOpMode
         mecanumAuto.drive(-autoDrivePower, driveToRung * countsToDriveOneInch);
         waitForMotionToComplete();
         sleep(autoDelay);
-
-        mecanumAuto.strafe(autoDrivePower,strafeToCenter * countsToDriveOneInch);
-        waitForMotionToComplete();
-        sleep(autoDelay);
+//
+//        mecanumAuto.strafe(autoDrivePower,strafeToCenter * countsToDriveOneInch);
+//        waitForMotionToComplete();
+//        sleep(autoDelay);
 
         elevator.toHighRungPosition();
         waitForElevatorToStop();

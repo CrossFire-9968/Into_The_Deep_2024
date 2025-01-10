@@ -46,7 +46,7 @@ public class RobotManual extends OpMode
          elevator.toLowRungPosition();
       }
       else if (gamepad2.square) {
-         elevator.toLowBucket();
+         elevator.toHighBucket();
       }
       else if (gamepad2.cross) {
          elevator.toHome();

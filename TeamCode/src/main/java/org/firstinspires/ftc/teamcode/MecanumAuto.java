@@ -12,8 +12,6 @@ public class MecanumAuto extends Mecanum {
         runToPosition();
     }
 
-
-
     // 39 counts per inch est.
     public void strafe (double power, int distance)
     {
