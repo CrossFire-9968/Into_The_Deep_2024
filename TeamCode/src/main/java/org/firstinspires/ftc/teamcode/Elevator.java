@@ -142,7 +142,8 @@ public class Elevator
       elevator_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
    }
 
-   public void toHighRungPosition()
+   public void
+   toHighRungPosition()
    {
       if (this.getPosition() < highRungPosition) {
          elevator_Motor.setPower(raiseSpeed);

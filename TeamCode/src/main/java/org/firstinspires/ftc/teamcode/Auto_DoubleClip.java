@@ -13,7 +13,7 @@ public class Auto_DoubleClip extends LinearOpMode {
     public MecanumAuto mecanumAuto = new MecanumAuto();
     private ElapsedTime cameraTimer = new ElapsedTime();
     private long autoStateDelay = 300;
-    private double autoDrivePower = 0.1;
+    private double autoDrivePower = 0.5;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -48,12 +48,12 @@ public class Auto_DoubleClip extends LinearOpMode {
 
     public void clipSpecimen() {
         int countsToDriveOneInch = -33; // Approximate encoder counts to drive 1 inch
-        int driveToRung = 26;
+        int driveToRung = 25;
         int driveToClip = 8;
         int strafeNextSpecimen = 48;
         int rotateToSample = 1950;
         int driveToSpecimen = 21;
-        int driveToGrab = 4;
+        int driveToGrab = 6;
         int driveToNextClip = 24;
         int strafe2ndClip = 55;
         int rotateToSub = 1900;
@@ -69,89 +69,89 @@ public class Auto_DoubleClip extends LinearOpMode {
 //        waitForMotionToComplete();
 //           sleep(autoDelay);
 
-//        elevator.toHighRungPosition();
-//        waitForElevatorToStop();
-//        sleep(autoDelay);
-//
-//        mecanumAuto.drive(-autoDrivePower, driveToClip * countsToDriveOneInch);
-//        waitForMotionToComplete();
-//        sleep(autoDelay);
-//
-//        elevator.toHighRungHookPosition();
-//        waitForElevatorToStop();
-//        //sleep(200);
-//
-//        gripper.open();
-//        sleep(autoDelay);
-//
-//        elevator.toHome();
-//        waitForElevatorToStop();
-//        //sleep(autoDelay);
+        elevator.toHighRungPosition();
+        waitForElevatorToStop();
+        sleep(autoDelay);
 
-//        mecanumAuto.strafe(-autoDrivePower, strafeNextSpecimen * countsToDriveOneInch);
-//        waitForMotionToComplete();
-//        sleep(autoDelay);
-//
-//        mecanumAuto.rotate(-autoDrivePower, rotateToSample);
-//        waitForMotionToComplete();
-//        sleep(autoDelay);
-//
-//        mecanumAuto.drive(-autoDrivePower, driveToSpecimen * countsToDriveOneInch);
-//        waitForMotionToComplete();
-//        sleep(1000);
-//
-//        mecanumAuto.drive(-autoDrivePower, driveToGrab * countsToDriveOneInch);
-//        waitForMotionToComplete();
-////        sleep(autoDelay);
-//
-//        gripper.close();
-//        sleep(1000);
-//
-//        elevator.toLowRungPosition();
-//        waitForElevatorToStop();
-//        //sleep(autoDelay);
-//
-//        mecanumAuto.drive(-autoDrivePower, -driveToNextClip * countsToDriveOneInch);
-//        waitForMotionToComplete();
+        mecanumAuto.drive(-autoDrivePower, driveToClip * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        elevator.toHighRungHookPosition();
+        waitForElevatorToStop();
+        //sleep(200);
+
+        gripper.open();
+        sleep(autoDelay);
+
+        elevator.toHome();
+        waitForElevatorToStop();
+        //sleep(autoDelay);
+
+        mecanumAuto.strafe(-autoDrivePower, strafeNextSpecimen * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.rotate(-autoDrivePower, rotateToSample);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, driveToSpecimen * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(1000);
+
+        mecanumAuto.drive(-autoDrivePower, driveToGrab * countsToDriveOneInch);
+        waitForMotionToComplete();
 //        sleep(autoDelay);
 
-//        mecanumAuto.strafe(-autoDrivePower, strafe2ndClip * countsToDriveOneInch);
-//        waitForMotionToComplete();
+        gripper.close();
+        sleep(1000);
+
+        elevator.toLowRungPosition();
+        waitForElevatorToStop();
+        //sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, -driveToNextClip * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.strafe(-autoDrivePower, strafe2ndClip * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+       mecanumAuto.rotate(-autoDrivePower, -rotateToSub);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        elevator.toHighRungPosition();
+        waitForElevatorToStop();
+        //sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, 8 * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        elevator.toHighRungHookPosition();
+        waitForElevatorToStop();
+        //sleep(200);
+
+        gripper.open();
 //        sleep(autoDelay);
-//
-//       mecanumAuto.rotate(-autoDrivePower, -rotateToSub);
-//        waitForMotionToComplete();
-//        sleep(autoDelay);
-//
-//        elevator.toHighRungPosition();
-//        waitForElevatorToStop();
-//        //sleep(autoDelay);
-//
-//        mecanumAuto.drive(-autoDrivePower, 9 * countsToDriveOneInch);
-//        waitForMotionToComplete();
-//        sleep(autoDelay);
-//
-//        elevator.toHighRungHookPosition();
-//        waitForElevatorToStop();
-//        //sleep(200);
-//
-//        gripper.open();
-////        sleep(autoDelay);
-//
-//        mecanumAuto.drive(-autoDrivePower, -8 * countsToDriveOneInch);
-//        waitForMotionToComplete();
-//        sleep(autoDelay);
-//
-//        elevator.toHome();
-//        waitForElevatorToStop();
-//
-//        mecanumAuto.strafe(-autoDrivePower, strafeToPark * countsToDriveOneInch);
-//        waitForMotionToComplete();
-//        sleep(autoDelay);
-//
-//        mecanumAuto.drive(-autoDrivePower, -backToPark * countsToDriveOneInch);
-//        waitForMotionToComplete();
-//        sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, -8 * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        elevator.toHome();
+        waitForElevatorToStop();
+
+        mecanumAuto.strafe(-autoDrivePower, strafeToPark * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, -backToPark * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
     }
 
     // Drive until one of the 4 wheels has reached it's target position. We only wait for one

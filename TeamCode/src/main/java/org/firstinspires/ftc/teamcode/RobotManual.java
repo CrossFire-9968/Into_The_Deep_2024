@@ -76,10 +76,10 @@ public class RobotManual extends OpMode
       }
 
       // --- Ascent arm control ------------------
-      if (gamepad1.dpad_up) {
+      if (gamepad1.triangle) {
          ascent.ascentArmRaise();
       }
-      else if (gamepad1.dpad_down) {
+      else if (gamepad1.cross) {
          ascent.ascentArmLower();
       }
       else{
@@ -87,11 +87,11 @@ public class RobotManual extends OpMode
       }
 
       // --- Ascent pulley control ------------------
-     if (gamepad1.dpad_left) {
+     if (gamepad1.square) {
          ascent.ascentPulleyRaise();
       }
 
-     else if (gamepad1.dpad_right) {
+     else if (gamepad1.circle) {
          ascent.ascentPulleyLower();
       }
       else {
