@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous(name="AutoSingleClip")
-public class Auto_ClipObserv extends LinearOpMode
+public class Auto_SingleClip extends LinearOpMode
 {
     public Blinkin blinkin = new Blinkin();
     public Elevator elevator = new Elevator();
@@ -55,11 +55,11 @@ public class Auto_ClipObserv extends LinearOpMode
         int driveToRung = 26;
         int driveToClip = 8;
         int backToWall = -12;
-        int strafeToObserv = 48;
+        int strafeToObserv = 40;
         int driveToSample = 45;
-        int strafeToSample = 18;
+        int strafeToSample = 14;
         int backSample = -63;
-        int nextSample = 63;
+        int nextSample = 62;
         int strafeNextSample = 12;
         int autoDelay = 500;
 
@@ -123,17 +123,17 @@ public class Auto_ClipObserv extends LinearOpMode
         waitForMotionToComplete();
         sleep(autoDelay);
 
-        mecanumAuto.drive(-autoDrivePower, nextSample * countsToDriveOneInch);
-        waitForMotionToComplete();
-        sleep(autoDelay);
-
-        mecanumAuto.strafe(-autoDrivePower, strafeNextSample * countsToDriveOneInch);
-        waitForMotionToComplete();
-        sleep(autoDelay);
-
-        mecanumAuto.drive(-autoDrivePower, backSample * countsToDriveOneInch);
-        waitForMotionToComplete();
-        sleep(autoDelay);
+//        mecanumAuto.drive(-autoDrivePower, nextSample * countsToDriveOneInch);
+//        waitForMotionToComplete();
+//        sleep(autoDelay);
+//
+//        mecanumAuto.strafe(-autoDrivePower, strafeNextSample * countsToDriveOneInch);
+//        waitForMotionToComplete();
+//        sleep(autoDelay);
+//
+//        mecanumAuto.drive(-autoDrivePower, backSample * countsToDriveOneInch);
+//        waitForMotionToComplete();
+//        sleep(autoDelay);
 
     }
 
