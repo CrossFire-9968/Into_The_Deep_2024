@@ -67,8 +67,8 @@ public class Mecanum
       // Ratiometric calculation that proportionally reduces all powers in cases where on
       // motor input is greater than 1.0. This keeps the driving feel consistent to the driver.
       LFrontPower = (LFrontPower / max);
-      RFrontPower = (RFrontPower / max * 1.05);
-      RRearPower = (RRearPower / max * 1.05);
+      RFrontPower = (RFrontPower / max * 1);
+      RRearPower = (RRearPower / max * 1);
       LRearPower = (LRearPower / max);
 
       // Set motor speed

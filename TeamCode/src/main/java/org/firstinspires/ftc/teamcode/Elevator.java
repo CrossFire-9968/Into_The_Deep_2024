@@ -13,7 +13,7 @@ public class Elevator
 {
    public DcMotor elevator_Motor;
    private static final double raiseSpeed = 1.0;
-   private static final double lowerSpeed = -0.7;
+   private static final double lowerSpeed = -0.8;
    private static final int wallElementPosition = 240;
    private static final int lowBucketPosition = 1600;
    private static final int highBucketPosition = 3000;
