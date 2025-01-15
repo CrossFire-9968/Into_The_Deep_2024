@@ -13,20 +13,20 @@ public class RobotManual extends OpMode
    public Elevator elevator = new Elevator();
    public Gripper gripper = new Gripper();
    public Color_Sensor colorSensor = new Color_Sensor();
+   public Pivot pivot = new Pivot();
 
-   @Override
-   public void init() {
+   public Ascent ascent = new Ascent();
 
+   public void init()
+   {
       blinkin.init(hardwareMap);
       mecanum.init(hardwareMap);
       elevator.init(hardwareMap);
       gripper.init(hardwareMap);
       colorSensor.init(hardwareMap);
+      pivot.init(hardwareMap);
+      ascent.init(hardwareMap);
    }
-
-
-
-
 
    @Override
    public void loop()
@@ -63,13 +63,13 @@ public class RobotManual extends OpMode
 
       // --- Encoder elevator control ------------------
       if (gamepad2.triangle) {
-         elevator.toLowRungPosition();
+         elevator.toHighRungPosition();
       }
       else if (gamepad2.circle) {
-         elevator.toWallElementPosition();
+         elevator.toLowRungPosition();
       }
       else if (gamepad2.square) {
-         elevator.toHighRungPosition();
+         elevator.toHighBucket();
       }
       else if (gamepad2.cross) {
          elevator.toHome();
@@ -85,6 +85,40 @@ public class RobotManual extends OpMode
          gripper.open();
 //         blinkin.white();
       }
+
+      // --- Pivot control ------------------
+      if (gamepad2.dpad_right) {
+         pivot.pivot_Down();
+      }
+
+      if (gamepad2.dpad_left) {
+         pivot.pivot_Up();
+      }
+
+      // --- Ascent arm control ------------------
+      if (gamepad1.triangle) {
+         ascent.ascentArmRaise();
+      }
+      else if (gamepad1.cross) {
+         ascent.ascentArmLower();
+      }
+      else{
+         ascent.ascentArmIdle();
+      }
+
+      // --- Ascent pulley control ------------------
+     if (gamepad1.square) {
+         ascent.ascentPulleyRaise();
+      }
+
+     else if (gamepad1.circle) {
+         ascent.ascentPulleyLower();
+      }
+      else {
+         ascent.ascentPulleyIdle();
+      }
+
+
       elevator.getElevatorTelemetry(telemetry);
       telemetry.addData("Gripper State: ", gripper.getState());
       telemetry.addData("Color Hue: ", colorSensor.getHue());

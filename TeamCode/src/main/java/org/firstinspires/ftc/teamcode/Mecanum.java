@@ -25,7 +25,7 @@ public class Mecanum
       motor_LF.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
       motor_RF = hwMap.get(DcMotor.class, "Motor_RF");
-      motor_RF.setDirection(DcMotorSimple.Direction.FORWARD);
+      motor_RF.setDirection(DcMotorSimple.Direction.REVERSE);
       motor_RF.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
       motor_RR = hwMap.get(DcMotor.class, "Motor_RR");
@@ -67,14 +67,14 @@ public class Mecanum
       // Ratiometric calculation that proportionally reduces all powers in cases where on
       // motor input is greater than 1.0. This keeps the driving feel consistent to the driver.
       LFrontPower = (LFrontPower / max);
-      RFrontPower = (RFrontPower / max);
-      RRearPower = (RRearPower / max);
+      RFrontPower = (RFrontPower / max * 1.05);
+      RRearPower = (RRearPower / max * 1.05);
       LRearPower = (LRearPower / max);
 
       // Set motor speed
       setEachMecanumPower(LFrontPower, RFrontPower, RRearPower, LRearPower);
    }
-
+   
    // Set all mecanum powers
    protected void setAllMecanumPowers(double power)
    {

@@ -11,18 +11,21 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Elevator
 {
-   private DcMotor elevator_Motor;
+   public DcMotor elevator_Motor;
    private static final double raiseSpeed = 1.0;
    private static final double lowerSpeed = -0.7;
    private static final int wallElementPosition = 240;
+   private static final int lowBucketPosition = 1600;
+   private static final int highBucketPosition = 3000;
    private static final int lowRungPosition = 440;
-   private static final int highRungPosition = 1517;
+   private static final int highRungPosition = 1325;
+   private static final int highRungHookPosition = 975;
 
    // Motor PIDF coefficients, USE CAUTION. These values change how the motor
    // responds when commanded to an encoder position.
-   public static final double NEW_P = 6.0;
-   public static final double NEW_I = 0.3;
-   public static final double NEW_D = 0.2;
+   public static final double NEW_P = 10.0;
+   public static final double NEW_I = 0.75;
+   public static final double NEW_D = 0.1;
    public static final double NEW_F = 1.0;
    PIDFCoefficients pidfNew;
    PIDFCoefficients pidCheck;
@@ -100,6 +103,32 @@ public class Elevator
       elevator_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
    }
 
+   public void toLowBucket()
+   {
+      if (this.getPosition() < lowBucketPosition) {
+         elevator_Motor.setPower(raiseSpeed);
+      }
+      else {
+         elevator_Motor.setPower(lowerSpeed);
+      }
+
+      elevator_Motor.setTargetPosition(lowBucketPosition);
+      elevator_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+   }
+
+   public void toHighBucket()
+   {
+      if (this.getPosition() < highBucketPosition) {
+         elevator_Motor.setPower(raiseSpeed);
+      }
+      else {
+         elevator_Motor.setPower(lowerSpeed);
+      }
+
+      elevator_Motor.setTargetPosition(highBucketPosition);
+      elevator_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+   }
+
    public void toLowRungPosition()
    {
       if (this.getPosition() < lowRungPosition) {
@@ -113,7 +142,8 @@ public class Elevator
       elevator_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
    }
 
-   public void toHighRungPosition()
+   public void
+   toHighRungPosition()
    {
       if (this.getPosition() < highRungPosition) {
          elevator_Motor.setPower(raiseSpeed);
@@ -133,6 +163,13 @@ public class Elevator
       elevator_Motor.setTargetPosition(homePosition);
       elevator_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
    }
+
+   public void toHighRungHookPosition(){
+      elevator_Motor.setPower(lowerSpeed);
+      elevator_Motor.setTargetPosition(highRungHookPosition);
+      elevator_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+   }
+
 
    public void getElevatorTelemetry(Telemetry telemetry)
    {
