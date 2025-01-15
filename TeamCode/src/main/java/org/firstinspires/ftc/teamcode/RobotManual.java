@@ -33,15 +33,15 @@ public class RobotManual extends OpMode
    {
       mecanum.manualDrive(gamepad1, telemetry);
       double hue = colorSensor.getHue();
-      if ((hue >= 70) && (hue <= 90)){
+      if ((hue >= 70) && (hue <= 100)){
          telemetry.addData("Yellow", hue);
          blinkin.setColor(RevBlinkinLedDriver.BlinkinPattern.YELLOW);
       }
-      else if ((hue >= 10) && (hue <= 30)){
+      else if ((hue >= 10) && (hue <= 40)){
          telemetry.addData("Red", hue);
          blinkin.setColor(RevBlinkinLedDriver.BlinkinPattern.RED);
    }
-      else if ((hue >= 210) && (hue <= 230)){
+      else if ((hue >= 200) && (hue <= 230)){
          telemetry.addData("Blue", hue);
          blinkin.setColor(RevBlinkinLedDriver.BlinkinPattern.BLUE);
       }
