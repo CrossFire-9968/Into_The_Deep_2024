@@ -49,24 +49,76 @@ public class Auto_Bucket extends LinearOpMode {
     public void bucketSample(){
         int countsToDriveOneInch = -33; // Approximate encoder counts to drive 1 inch
         int autoDelay = 250;
-        int strafeToBucket = 48;
-        int driveToTurn = 24;
-        int rotateToBucket = 1900;
+        int driveToRung = 26;
+        int driveToClip = 8;
+        int backUp = -12;
+        int strafeToSamples = -40;
+        int driveToClipOne = 22;
+        int strafeToClipOne = -14;
+        int pushClipOne = -41;
+        int driveToClipTwo = 50;
+        int strafeToClipTwo = 10;
+        int pushClipTwo = 35;
+        int driveToPark = 40;
+        int rotateToSub = 1800;
 
-        mecanumAuto.strafe(autoDrivePower, strafeToBucket * countsToDriveOneInch);
+        mecanumAuto.drive(-autoDrivePower, driveToRung * countsToDriveOneInch);
         waitForMotionToComplete();
         sleep(autoDelay);
 
-        mecanumAuto.drive(autoDrivePower, driveToTurn * countsToDriveOneInch);
+        elevator.toHighRungPosition();
+        waitForElevatorToStop();
+        sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, driveToClip * countsToDriveOneInch);
         waitForMotionToComplete();
         sleep(autoDelay);
 
-        mecanumAuto.rotate(autoDrivePower, rotateToBucket);
+        elevator.toHighRungHookPosition();
+        waitForElevatorToStop();
+        sleep(300);
+
+        gripper.open();
+        sleep(autoDelay);
+
+        //robot back up to before strafe over to samples
+        mecanumAuto.drive(-autoDrivePower, backUp * countsToDriveOneInch);
         waitForMotionToComplete();
         sleep(autoDelay);
 
-        
+        mecanumAuto.strafe(-autoDrivePower, strafeToSamples * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
 
+        mecanumAuto.drive(-autoDrivePower, driveToClipOne * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.strafe(-autoDrivePower, strafeToClipOne * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, pushClipOne * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, driveToClipTwo * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.strafe(-autoDrivePower, strafeToClipTwo * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, pushClipTwo * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, driveToPark * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.rotate(-autoDrivePower, rotateToSub * countsToDriveOneInch);
     }
 
     public void waitForMotionToComplete() {

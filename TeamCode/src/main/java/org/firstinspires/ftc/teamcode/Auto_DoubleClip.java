@@ -51,9 +51,9 @@ public class Auto_DoubleClip extends LinearOpMode {
         int driveToRung = 25;
         int driveToClip = 8;
         int strafeNextSpecimen = 48;
-        int rotateToSample = 1900;
+        int rotateToSample = 1950;
         int driveToSpecimen = 14;
-        int driveToGrab = 5;
+        int driveToGrab = 6;
         int driveToNextClip = 22;
         int strafe2ndClip = 55;
         int rotateToSub = 1900;
@@ -131,7 +131,7 @@ public class Auto_DoubleClip extends LinearOpMode {
         waitForElevatorToStop();
         //sleep(autoDelay);
 
-        mecanumAuto.drive(-autoDrivePower, 11 * countsToDriveOneInch);
+        mecanumAuto.drive(-autoDrivePower, 12 * countsToDriveOneInch);
         waitForMotionToComplete();
         sleep(autoDelay);
 
