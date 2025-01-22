@@ -16,6 +16,9 @@ public class Blinkin {
    public void setColor(RevBlinkinLedDriver.BlinkinPattern color){
       blinkin.setPattern(color);
    }
+
+
+
 }
 
 //package org.firstinspires.ftc.teamcode;

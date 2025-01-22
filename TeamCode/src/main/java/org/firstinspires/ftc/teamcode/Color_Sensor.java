@@ -27,6 +27,8 @@ public class Color_Sensor {
         int green = sensor.green();
         int blue = sensor.blue();
 
+
+
         // Get minimum and maximum RGB values
         // Calculate difference between max and min
         double cmax = Math.max(red, Math.max(green, blue));   // maximum of r, g, b

@@ -79,11 +79,11 @@ public class RobotManual extends OpMode
       if (gamepad2.left_bumper) {
          gripper.close();
          gamepad2.rumble(100);
-//         blinkin.green();
+        // blinkin.green();
       }
       else if (gamepad2.right_bumper) {
          gripper.open();
-//         blinkin.white();
+        //blinkin.white();
       }
 
       // --- Pivot control ------------------
