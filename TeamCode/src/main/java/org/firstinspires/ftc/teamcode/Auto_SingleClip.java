@@ -123,17 +123,17 @@ public class Auto_SingleClip extends LinearOpMode
         waitForMotionToComplete();
         sleep(autoDelay);
 
-        mecanumAuto.drive(-autoDrivePower, nextSample * countsToDriveOneInch);
-        waitForMotionToComplete();
-        sleep(autoDelay);
-
-        mecanumAuto.strafe(-autoDrivePower, strafeNextSample * countsToDriveOneInch);
-        waitForMotionToComplete();
-        sleep(autoDelay);
-
-        mecanumAuto.drive(-autoDrivePower, backSample * countsToDriveOneInch);
-        waitForMotionToComplete();
-        sleep(autoDelay);
+//        mecanumAuto.drive(-autoDrivePower, nextSample * countsToDriveOneInch);
+//        waitForMotionToComplete();
+//        sleep(autoDelay);
+//
+//        mecanumAuto.strafe(-autoDrivePower, strafeNextSample * countsToDriveOneInch);
+//        waitForMotionToComplete();
+//        sleep(autoDelay);
+//
+//        mecanumAuto.drive(-autoDrivePower, backSample * countsToDriveOneInch);
+//        waitForMotionToComplete();
+//        sleep(autoDelay);
 
     }
 

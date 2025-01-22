@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -11,6 +12,7 @@ public class RobotManual extends OpMode
    public Mecanum mecanum = new Mecanum();
    public Elevator elevator = new Elevator();
    public Gripper gripper = new Gripper();
+   public Color_Sensor colorSensor = new Color_Sensor();
    public Pivot pivot = new Pivot();
 
    public Ascent ascent = new Ascent();
@@ -21,6 +23,7 @@ public class RobotManual extends OpMode
       mecanum.init(hardwareMap);
       elevator.init(hardwareMap);
       gripper.init(hardwareMap);
+      colorSensor.init(hardwareMap);
       pivot.init(hardwareMap);
       ascent.init(hardwareMap);
    }
@@ -29,6 +32,23 @@ public class RobotManual extends OpMode
    public void loop()
    {
       mecanum.manualDrive(gamepad1, telemetry);
+      double hue = colorSensor.getHue();
+      if ((hue >= 70) && (hue <= 100)){
+         telemetry.addData("Yellow", hue);
+         blinkin.setColor(RevBlinkinLedDriver.BlinkinPattern.YELLOW);
+      }
+      else if ((hue >= 10) && (hue <= 40)){
+         telemetry.addData("Red", hue);
+         blinkin.setColor(RevBlinkinLedDriver.BlinkinPattern.RED);
+   }
+      else if ((hue >= 200) && (hue <= 230)){
+         telemetry.addData("Blue", hue);
+         blinkin.setColor(RevBlinkinLedDriver.BlinkinPattern.BLUE);
+      }
+      else {
+         telemetry.addData("Unknown", hue);
+         blinkin.setColor(RevBlinkinLedDriver.BlinkinPattern.GREEN);
+      }
 
       // --- Manual elevator control ------------------
       if (gamepad2.dpad_up) {
@@ -59,11 +79,11 @@ public class RobotManual extends OpMode
       if (gamepad2.left_bumper) {
          gripper.close();
          gamepad2.rumble(100);
-         blinkin.green();
+        // blinkin.green();
       }
       else if (gamepad2.right_bumper) {
          gripper.open();
-         blinkin.white();
+        //blinkin.white();
       }
 
       // --- Pivot control ------------------
@@ -101,6 +121,7 @@ public class RobotManual extends OpMode
 
       elevator.getElevatorTelemetry(telemetry);
       telemetry.addData("Gripper State: ", gripper.getState());
+      telemetry.addData("Color Hue: ", colorSensor.getHue());
       mecanum.getMotorTelemetry(telemetry);
       telemetry.update();
    }
