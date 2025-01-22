@@ -41,7 +41,7 @@ public class Auto_Bucket extends LinearOpMode {
 
         // Run this code while Autonomous has not timed out
         while (opModeIsActive() && !isAutoComplete) {
-            //clipSpecimen();
+            bucketSample();
 
             isAutoComplete = true;
         }
@@ -52,15 +52,17 @@ public class Auto_Bucket extends LinearOpMode {
         int driveToRung = 26;
         int driveToClip = 8;
         int backUp = -12;
-        int strafeToSamples = -40;
-        int driveToClipOne = 22;
-        int strafeToClipOne = -14;
-        int pushClipOne = -41;
-        int driveToClipTwo = 50;
-        int strafeToClipTwo = 10;
-        int pushClipTwo = 35;
-        int driveToPark = 40;
-        int rotateToSub = 1800;
+        int strafeToSamples = -38;
+        int driveToClipOne = 40;
+        int strafeToClipOne = -16;
+        int pushClipOne = -61;
+        int driveToClipTwo = 60;
+        int strafeToClipTwo = -18;
+        int pushClipTwo = -50;
+        int driveToPark = 50;
+        int rotateToSub = 30;
+        int driveToSub = 32;
+        int driveToBar = 3;
 
         mecanumAuto.drive(-autoDrivePower, driveToRung * countsToDriveOneInch);
         waitForMotionToComplete();
@@ -80,6 +82,10 @@ public class Auto_Bucket extends LinearOpMode {
 
         gripper.open();
         sleep(autoDelay);
+
+        elevator.toHome();
+        waitForElevatorToStop();
+        sleep(300);
 
         //robot back up to before strafe over to samples
         mecanumAuto.drive(-autoDrivePower, backUp * countsToDriveOneInch);
@@ -119,6 +125,25 @@ public class Auto_Bucket extends LinearOpMode {
         sleep(autoDelay);
 
         mecanumAuto.rotate(-autoDrivePower, rotateToSub * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, driveToSub * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        elevator.toHighRungPosition();
+        waitForElevatorToStop();
+        sleep(500);
+
+        mecanumAuto.drive(-autoDrivePower, driveToBar * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        pivot.pivot_Down();
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
     }
 
     public void waitForMotionToComplete() {
