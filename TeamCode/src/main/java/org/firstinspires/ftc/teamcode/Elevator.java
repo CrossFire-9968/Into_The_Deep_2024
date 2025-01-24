@@ -20,6 +20,7 @@ public class Elevator
    private static final int lowRungPosition = 440;
    private static final int highRungPosition = 1325;
    private static final int highRungHookPosition = 975;
+   private static  int homePosition = 0;
 
    // Motor PIDF coefficients, USE CAUTION. These values change how the motor
    // responds when commanded to an encoder position.
@@ -158,7 +159,6 @@ public class Elevator
 
    public void toHome()
    {
-      int homePosition = 0;
       elevator_Motor.setPower(lowerSpeed);
       elevator_Motor.setTargetPosition(homePosition);
       elevator_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);

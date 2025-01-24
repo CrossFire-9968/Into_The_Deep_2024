@@ -41,12 +41,12 @@ public class Auto_Bucket extends LinearOpMode {
 
         // Run this code while Autonomous has not timed out
         while (opModeIsActive() && !isAutoComplete) {
-            bucketSample();
+            bucketClip();
 
             isAutoComplete = true;
         }
     }
-    public void bucketSample(){
+    public void bucketClip(){
         int countsToDriveOneInch = -33; // Approximate encoder counts to drive 1 inch
         int autoDelay = 250;
         int driveToRung = 26;
@@ -54,15 +54,15 @@ public class Auto_Bucket extends LinearOpMode {
         int backUp = -12;
         int strafeToSamples = -38;
         int driveToClipOne = 40;
-        int strafeToClipOne = -16;
-        int pushClipOne = -61;
+        int strafeToClipOne = -18;
+        int pushClipOne = -59;
         int driveToClipTwo = 60;
-        int strafeToClipTwo = -18;
+        int strafeToClipTwo = -16;
         int pushClipTwo = -50;
         int driveToPark = 50;
         int rotateToSub = 30;
         int driveToSub = 32;
-        int driveToBar = 3;
+        int driveToBar = 6;
 
         mecanumAuto.drive(-autoDrivePower, driveToRung * countsToDriveOneInch);
         waitForMotionToComplete();
