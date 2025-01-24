@@ -1,24 +1,25 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 
 @TeleOp(name = "Robot Manual")
-public class RobotManual extends OpMode
-{
+public class RobotManual extends OpMode {
    public Blinkin blinkin = new Blinkin();
    public Mecanum mecanum = new Mecanum();
    public Elevator elevator = new Elevator();
    public Gripper gripper = new Gripper();
    public Color_Sensor colorSensor = new Color_Sensor();
    public Pivot pivot = new Pivot();
+   public ElapsedTime timer = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
+   public boolean playWasPressed = false;
 
    public Ascent ascent = new Ascent();
 
-   public void init()
-   {
+   public void init() {
       blinkin.init(hardwareMap);
       mecanum.init(hardwareMap);
       elevator.init(hardwareMap);
@@ -28,24 +29,27 @@ public class RobotManual extends OpMode
       ascent.init(hardwareMap);
    }
 
+
    @Override
-   public void loop()
-   {
+   public void loop() {
+      if (!playWasPressed) {
+         timer.reset();
+         playWasPressed = true;
+      }
+
+
       mecanum.manualDrive(gamepad1, telemetry);
       double hue = colorSensor.getHue();
-      if ((hue >= 70) && (hue <= 100)){
+      if ((hue >= 70) && (hue <= 100)) {
          telemetry.addData("Yellow", hue);
          blinkin.setColor(RevBlinkinLedDriver.BlinkinPattern.YELLOW);
-      }
-      else if ((hue >= 10) && (hue <= 40)){
+      } else if ((hue >= 10) && (hue <= 40)) {
          telemetry.addData("Red", hue);
          blinkin.setColor(RevBlinkinLedDriver.BlinkinPattern.RED);
-   }
-      else if ((hue >= 200) && (hue <= 230)){
+      } else if ((hue >= 200) && (hue <= 230)) {
          telemetry.addData("Blue", hue);
          blinkin.setColor(RevBlinkinLedDriver.BlinkinPattern.BLUE);
-      }
-      else {
+      } else {
          telemetry.addData("Unknown", hue);
          blinkin.setColor(RevBlinkinLedDriver.BlinkinPattern.GREEN);
       }
@@ -53,25 +57,20 @@ public class RobotManual extends OpMode
       // --- Manual elevator control ------------------
       if (gamepad2.dpad_up) {
          elevator.raiseManual();
-      }
-      else if (gamepad2.dpad_down) {
+      } else if (gamepad2.dpad_down) {
          elevator.lowerManual();
-      }
-      else {
+      } else {
          elevator.stop();
       }
 
       // --- Encoder elevator control ------------------
       if (gamepad2.triangle) {
          elevator.toHighRungPosition();
-      }
-      else if (gamepad2.circle) {
+      } else if (gamepad2.circle) {
          elevator.toLowRungPosition();
-      }
-      else if (gamepad2.square) {
+      } else if (gamepad2.square) {
          elevator.toHighBucket();
-      }
-      else if (gamepad2.cross) {
+      } else if (gamepad2.cross) {
          elevator.toHome();
       }
 
@@ -79,11 +78,10 @@ public class RobotManual extends OpMode
       if (gamepad2.left_bumper) {
          gripper.close();
          gamepad2.rumble(100);
-        // blinkin.green();
-      }
-      else if (gamepad2.right_bumper) {
+         // blinkin.green();
+      } else if (gamepad2.right_bumper) {
          gripper.open();
-        //blinkin.white();
+         //blinkin.white();
       }
 
       // --- Pivot control ------------------
@@ -98,31 +96,29 @@ public class RobotManual extends OpMode
       // --- Ascent arm control ------------------
       if (gamepad1.triangle) {
          ascent.ascentArmRaise();
-      }
-      else if (gamepad1.cross) {
+      } else if (gamepad1.cross) {
          ascent.ascentArmLower();
-      }
-      else{
+      } else {
          ascent.ascentArmIdle();
       }
 
       // --- Ascent pulley control ------------------
-     if (gamepad1.square) {
+      if (gamepad1.square) {
          ascent.ascentPulleyRaise();
-      }
-
-     else if (gamepad1.circle) {
+      } else if (gamepad1.circle) {
          ascent.ascentPulleyLower();
-      }
-      else {
+      } else {
          ascent.ascentPulleyIdle();
       }
 
+      if (timer.seconds() >= 90 && timer.seconds() < 120) {
+         blinkin.setColor(RevBlinkinLedDriver.BlinkinPattern.VIOLET);
+      }
 
-      elevator.getElevatorTelemetry(telemetry);
-      telemetry.addData("Gripper State: ", gripper.getState());
-      telemetry.addData("Color Hue: ", colorSensor.getHue());
-      mecanum.getMotorTelemetry(telemetry);
-      telemetry.update();
+         elevator.getElevatorTelemetry(telemetry);
+         telemetry.addData("Gripper State: ", gripper.getState());
+         telemetry.addData("Color Hue: ", colorSensor.getHue());
+         mecanum.getMotorTelemetry(telemetry);
+         telemetry.update();
    }
 }
