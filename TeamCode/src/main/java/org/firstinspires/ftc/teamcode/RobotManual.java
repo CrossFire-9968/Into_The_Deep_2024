@@ -16,6 +16,7 @@ public class RobotManual extends OpMode {
    public Pivot pivot = new Pivot();
    public ElapsedTime timer = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
    public boolean playWasPressed = false;
+   private RevBlinkinLedDriver.BlinkinPattern idleColor;
 
    public Ascent ascent = new Ascent();
 
@@ -35,8 +36,12 @@ public class RobotManual extends OpMode {
       if (!playWasPressed) {
          timer.reset();
          playWasPressed = true;
+         idleColor = RevBlinkinLedDriver.BlinkinPattern.WHITE;
       }
 
+      if (timer.seconds() >= 90 && timer.seconds() < 120) {
+         idleColor = RevBlinkinLedDriver.BlinkinPattern.VIOLET;
+      }
 
       mecanum.manualDrive(gamepad1, telemetry);
       double hue = colorSensor.getHue();
@@ -51,7 +56,7 @@ public class RobotManual extends OpMode {
          blinkin.setColor(RevBlinkinLedDriver.BlinkinPattern.BLUE);
       } else {
          telemetry.addData("Unknown", hue);
-         blinkin.setColor(RevBlinkinLedDriver.BlinkinPattern.GREEN);
+         blinkin.setColor(idleColor);
       }
 
       // --- Manual elevator control ------------------
@@ -111,9 +116,7 @@ public class RobotManual extends OpMode {
          ascent.ascentPulleyIdle();
       }
 
-      if (timer.seconds() >= 90 && timer.seconds() < 120) {
-         blinkin.setColor(RevBlinkinLedDriver.BlinkinPattern.VIOLET);
-      }
+
 
          elevator.getElevatorTelemetry(telemetry);
          telemetry.addData("Gripper State: ", gripper.getState());
