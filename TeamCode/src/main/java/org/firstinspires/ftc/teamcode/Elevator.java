@@ -11,13 +11,13 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Elevator
 {
-   public DcMotor elevator_Motor;
+   public DcMotor ElevatorMotor;
    private static final double raiseSpeed = 1.0;
    private static final double lowerSpeed = -0.8;
    private static final int wallElementPosition = 240;
    private static final int lowBucketPosition = 1600;
    private static final int highBucketPosition = 3000;
-   private static final int lowRungPosition = 440;
+   private static final int lowRungPosition =440;
    private static final int highRungPosition = 1325;
    private static final int highRungHookPosition = 975;
    private static  int homePosition = 0;
@@ -33,10 +33,10 @@ public class Elevator
 
    public void init(HardwareMap hwMap)
    {
-      elevator_Motor = hwMap.get(DcMotor.class, "ElevatorMotor");
-      elevator_Motor.setDirection(DcMotorSimple.Direction.REVERSE);
-      elevator_Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-      elevator_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+      ElevatorMotor = hwMap.get(DcMotor.class, "ElevatorMotor");
+      ElevatorMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+      ElevatorMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+      ElevatorMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
       this.setPIDF();
 
@@ -48,10 +48,10 @@ public class Elevator
    {
       // Get a reference to the motor controller and cast it as an extended functionality controller.
       // We assume it's a REV Robotics Expansion Hub, which supports the extended controller functions.
-      DcMotorControllerEx motorControllerEx = (DcMotorControllerEx) elevator_Motor.getController();
+      DcMotorControllerEx motorControllerEx = (DcMotorControllerEx) ElevatorMotor.getController();
 
       // Get the port number of our configured motor.
-      int motorIndex = ((DcMotorEx) elevator_Motor).getPortNumber();
+      int motorIndex = ((DcMotorEx) ElevatorMotor).getPortNumber();
 
       // change coefficients
       pidfNew = new PIDFCoefficients(NEW_P, NEW_I, NEW_D, NEW_F);
@@ -63,19 +63,19 @@ public class Elevator
 
    public int getPosition()
    {
-      return elevator_Motor.getCurrentPosition();
+      return ElevatorMotor.getCurrentPosition();
    }
 
    public void raiseManual()
    {
-      elevator_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-      elevator_Motor.setPower(raiseSpeed);
+      ElevatorMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+      ElevatorMotor.setPower(raiseSpeed);
    }
 
    public void lowerManual()
    {
-      elevator_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-      elevator_Motor.setPower(lowerSpeed);
+      ElevatorMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+      ElevatorMotor.setPower(lowerSpeed);
    }
 
    public void stop()
@@ -84,97 +84,97 @@ public class Elevator
       // In manual mode, this is anytime the driver is not pressing a raise or lower button.
       // In encoder mode, this is when the elevator is resting on at the bottom. There is no
       // reason to apply motor torque to hold position when the elevator is resting on the hard stop.
-      if ((elevator_Motor.getMode() != DcMotor.RunMode.RUN_TO_POSITION) || (elevator_Motor.getTargetPosition() == 0 && elevator_Motor.getCurrentPosition() < 5)) {
-         elevator_Motor.setPower(0.0);
-         elevator_Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-         elevator_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+      if ((ElevatorMotor.getMode() != DcMotor.RunMode.RUN_TO_POSITION) || (ElevatorMotor.getTargetPosition() == 0 && ElevatorMotor.getCurrentPosition() < 5)) {
+         ElevatorMotor.setPower(0.0);
+         ElevatorMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+         ElevatorMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
       }
    }
 
    public void toWallElementPosition()
    {
       if (this.getPosition() < wallElementPosition) {
-         elevator_Motor.setPower(raiseSpeed);
+         ElevatorMotor.setPower(raiseSpeed);
       }
       else {
-         elevator_Motor.setPower(lowerSpeed);
+         ElevatorMotor.setPower(lowerSpeed);
       }
 
-      elevator_Motor.setTargetPosition(wallElementPosition);
-      elevator_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+      ElevatorMotor.setTargetPosition(wallElementPosition);
+      ElevatorMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
    }
 
    public void toLowBucket()
    {
       if (this.getPosition() < lowBucketPosition) {
-         elevator_Motor.setPower(raiseSpeed);
+         ElevatorMotor.setPower(raiseSpeed);
       }
       else {
-         elevator_Motor.setPower(lowerSpeed);
+         ElevatorMotor.setPower(lowerSpeed);
       }
 
-      elevator_Motor.setTargetPosition(lowBucketPosition);
-      elevator_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+      ElevatorMotor.setTargetPosition(lowBucketPosition);
+      ElevatorMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
    }
 
    public void toHighBucket()
    {
       if (this.getPosition() < highBucketPosition) {
-         elevator_Motor.setPower(raiseSpeed);
+         ElevatorMotor.setPower(raiseSpeed);
       }
       else {
-         elevator_Motor.setPower(lowerSpeed);
+         ElevatorMotor.setPower(lowerSpeed);
       }
 
-      elevator_Motor.setTargetPosition(highBucketPosition);
-      elevator_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+      ElevatorMotor.setTargetPosition(highBucketPosition);
+      ElevatorMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
    }
 
    public void toLowRungPosition()
    {
       if (this.getPosition() < lowRungPosition) {
-         elevator_Motor.setPower(raiseSpeed);
+         ElevatorMotor.setPower(raiseSpeed);
       }
       else {
-         elevator_Motor.setPower(lowerSpeed);
+         ElevatorMotor.setPower(lowerSpeed);
       }
 
-      elevator_Motor.setTargetPosition(lowRungPosition);
-      elevator_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+      ElevatorMotor.setTargetPosition(lowRungPosition);
+      ElevatorMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
    }
 
    public void
    toHighRungPosition()
    {
       if (this.getPosition() < highRungPosition) {
-         elevator_Motor.setPower(raiseSpeed);
+         ElevatorMotor.setPower(raiseSpeed);
       }
       else {
-         elevator_Motor.setPower(lowerSpeed);
+         ElevatorMotor.setPower(lowerSpeed);
       }
 
-      elevator_Motor.setTargetPosition(highRungPosition);
-      elevator_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+      ElevatorMotor.setTargetPosition(highRungPosition);
+      ElevatorMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
    }
 
    public void toHome()
    {
-      elevator_Motor.setPower(lowerSpeed);
-      elevator_Motor.setTargetPosition(homePosition);
-      elevator_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+      ElevatorMotor.setPower(lowerSpeed);
+      ElevatorMotor.setTargetPosition(homePosition);
+      ElevatorMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
    }
 
    public void toHighRungHookPosition(){
-      elevator_Motor.setPower(lowerSpeed);
-      elevator_Motor.setTargetPosition(highRungHookPosition);
-      elevator_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+      ElevatorMotor.setPower(lowerSpeed);
+      ElevatorMotor.setTargetPosition(highRungHookPosition);
+      ElevatorMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
    }
 
 
    public void getElevatorTelemetry(Telemetry telemetry)
    {
-      telemetry.addData("Elevator Position: ", elevator_Motor.getTargetPosition());
-      telemetry.addData("Elevator Motor Mode: ", elevator_Motor.getMode());
+      telemetry.addData("Elevator Position: ", ElevatorMotor.getTargetPosition());
+      telemetry.addData("Elevator Motor Mode: ", ElevatorMotor.getMode());
       telemetry.addData("P,I,D,F", "%.04f, %.04f, %.04f, %.04f", pidCheck.p, pidCheck.i, pidCheck.d, pidCheck.f);
    }
 }

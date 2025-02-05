@@ -4,8 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name="AutoSingleClip")
-public class Auto_SingleClip extends LinearOpMode
+@Autonomous(name="AutoTripleClip")
+public class Auto_TripleClip extends LinearOpMode
 {
     public Blinkin blinkin = new Blinkin();
     public Elevator elevator = new Elevator();
@@ -51,7 +51,6 @@ public class Auto_SingleClip extends LinearOpMode
 
     public void clipSpecimen() {
         int countsToDriveOneInch = -33; // Approximate encoder counts to drive 1 inch
-        int strafeToCenter = -14;
         int driveToRung = 26;
         int driveToClip = 8;
         int backToWall = -12;
@@ -59,10 +58,17 @@ public class Auto_SingleClip extends LinearOpMode
         int driveToSample = 45;
         int strafeToSample = 14;
         int backSample = -63;
-        int nextSample = 62;
-        int strafeNextSample = 12;
         int autoDelay = 500;
+        int rotateToGrab = 90;
+        int driveToGrabSampleTwo = 5;
+        int backUp = -12;
+        int rotateToSub = 90;
+        int strafeToSub = 40;
+        int driveToClipAgain = 20;
+        int driveToClipTwo = 5;
+        int strafeToThree  = 36;
 
+        //first clip
         mecanumAuto.drive(-autoDrivePower, driveToRung * countsToDriveOneInch);
         waitForMotionToComplete();
         sleep(autoDelay);
@@ -85,6 +91,8 @@ public class Auto_SingleClip extends LinearOpMode
 
         gripper.open();
         sleep(autoDelay);
+
+        //second clip
 
         mecanumAuto.drive(-autoDrivePower, backToWall * countsToDriveOneInch);
         waitForMotionToComplete();
@@ -111,11 +119,69 @@ public class Auto_SingleClip extends LinearOpMode
         waitForMotionToComplete();
         sleep(autoDelay);
 
-        mecanumAuto.drive(-autoDrivePower, nextSample * countsToDriveOneInch);
+        mecanumAuto.rotate(-autoDrivePower, rotateToGrab * countsToDriveOneInch);
         waitForMotionToComplete();
         sleep(autoDelay);
 
-        mecanumAuto.strafe(-autoDrivePower, strafeNextSample * countsToDriveOneInch);
+        mecanumAuto.drive(-autoDrivePower, driveToGrabSampleTwo * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        gripper.close();
+        sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, backUp * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.rotate(-autoDrivePower, rotateToSub * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.strafe(-autoDrivePower, strafeToSub * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, driveToClipAgain * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        //clip second clip
+        elevator.toHighRungPosition();
+        waitForElevatorToStop();
+        sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, driveToClipTwo * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        elevator.toHighRungHookPosition();
+        waitForElevatorToStop();
+        sleep(autoDelay);
+
+        gripper.open();
+        sleep(autoDelay);
+
+        //third specimen
+
+        mecanumAuto.drive(-autoDrivePower, backToWall * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        elevator.toHome();
+        waitForElevatorToStop();
+        sleep(autoDelay);
+
+        // Strafe to grab sample
+        mecanumAuto.strafe(-autoDrivePower, strafeToObserv * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, driveToSample * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.strafe(-autoDrivePower, strafeToThree * countsToDriveOneInch);
         waitForMotionToComplete();
         sleep(autoDelay);
 
@@ -123,18 +189,47 @@ public class Auto_SingleClip extends LinearOpMode
         waitForMotionToComplete();
         sleep(autoDelay);
 
-//        mecanumAuto.drive(-autoDrivePower, nextSample * countsToDriveOneInch);
-//        waitForMotionToComplete();
-//        sleep(autoDelay);
-//
-//        mecanumAuto.strafe(-autoDrivePower, strafeNextSample * countsToDriveOneInch);
-//        waitForMotionToComplete();
-//        sleep(autoDelay);
-//
-//        mecanumAuto.drive(-autoDrivePower, backSample * countsToDriveOneInch);
-//        waitForMotionToComplete();
-//        sleep(autoDelay);
+        mecanumAuto.rotate(-autoDrivePower, rotateToGrab * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
 
+        mecanumAuto.drive(-autoDrivePower, driveToGrabSampleTwo * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        gripper.close();
+        sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, backUp * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.rotate(-autoDrivePower, rotateToSub * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.strafe(-autoDrivePower, strafeToSub * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, driveToClipAgain * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        elevator.toHighRungPosition();
+        waitForElevatorToStop();
+        sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, driveToClipTwo * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        elevator.toHighRungHookPosition();
+        waitForElevatorToStop();
+        sleep(autoDelay);
+
+        gripper.open();
+        sleep(autoDelay);
     }
 
     // Drive until one of the 4 wheels has reached it's target position. We only wait for one

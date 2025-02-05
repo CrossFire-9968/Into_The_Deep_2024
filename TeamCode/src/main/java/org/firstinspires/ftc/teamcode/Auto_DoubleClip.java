@@ -48,11 +48,11 @@ public class Auto_DoubleClip extends LinearOpMode {
 
     public void clipSpecimen() {
         int countsToDriveOneInch = -33; // Approximate encoder counts to drive 1 inch
-        int driveToRung = 25;
+        int driveToRung = 26;
         int driveToClip = 8;
         int strafeNextSpecimen = 48;
         int rotateToSample = 1950;
-        int driveToSpecimen = 14;
+        int driveToSpecimen = 15;
         int driveToGrab = 6;
         int driveToNextClip = 22;
         int strafe2ndClip = 55;
@@ -174,7 +174,7 @@ public class Auto_DoubleClip extends LinearOpMode {
     }
 
     public void waitForElevatorToStop() {
-        while (elevator.elevator_Motor.isBusy()) {
+        while (elevator.ElevatorMotor.isBusy()) {
             this.idle();
         }
     }

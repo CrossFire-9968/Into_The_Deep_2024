@@ -157,7 +157,7 @@ public class Auto_Bucket extends LinearOpMode {
     }
 
     public void waitForElevatorToStop() {
-        while (elevator.elevator_Motor.isBusy()) {
+        while (elevator.ElevatorMotor.isBusy()) {
             this.idle();
         }
     }

@@ -52,7 +52,14 @@ public class Auto_SampleBucket extends LinearOpMode {
         int autoDelay = 250;
         int driveToBucket = 36;
         int driveToDump = 6;
+        int strafeToGrab = 24;
+        int rotateToSample = -45;
+        int rotateToBucket = 90;
+        int driveNextSample = 24;
+        int backUp = -12;
+        int rotateToDump = 45;
 
+        //Dump the first sample
         mecanumAuto.drive(-autoDrivePower, driveToBucket * countsToDriveOneInch);
         waitForMotionToComplete();
         sleep(autoDelay);
@@ -64,6 +71,61 @@ public class Auto_SampleBucket extends LinearOpMode {
         mecanumAuto.drive(-autoDrivePower, driveToDump * countsToDriveOneInch);
         waitForMotionToComplete();
         sleep(autoDelay);
+
+        gripper.open();
+        sleep(autoDelay);
+
+        //Get next sample
+        mecanumAuto.drive(-autoDrivePower, backUp * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        elevator.toHome();
+        waitForElevatorToStop();
+        sleep(300);
+
+        mecanumAuto.strafe(-autoDrivePower, strafeToGrab * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.rotate(-autoDrivePower, rotateToSample * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        pivot.pivot_Down();
+        sleep(autoDelay);
+
+        gripper.close();
+        sleep(autoDelay);
+
+        pivot.pivot_Up();
+        sleep(autoDelay);
+
+        //Dump next sample
+        mecanumAuto.rotate(-autoDrivePower, rotateToBucket * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, driveNextSample * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.rotate(-autoDrivePower, rotateToDump * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        elevator.toHighBucket();
+        waitForElevatorToStop();
+        sleep(300);
+
+        mecanumAuto.drive(-autoDrivePower, driveToDump *countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        gripper.open();
+        sleep(autoDelay);
+
+        
 
     }
     public void waitForMotionToComplete() {
@@ -77,7 +139,7 @@ public class Auto_SampleBucket extends LinearOpMode {
     }
 
     public void waitForElevatorToStop() {
-        while (elevator.elevator_Motor.isBusy()) {
+        while (elevator.ElevatorMotor.isBusy()) {
             this.idle();
         }
     }
