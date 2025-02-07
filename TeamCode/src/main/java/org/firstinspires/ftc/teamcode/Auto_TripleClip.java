@@ -14,7 +14,7 @@ public class Auto_TripleClip extends LinearOpMode
     public MecanumAuto mecanumAuto = new MecanumAuto();
     private ElapsedTime cameraTimer = new ElapsedTime();
     private long autoStateDelay = 300;
-    private double autoDrivePower = 0.5;
+    private double autoDrivePower = 0.6;
 
     @Override
     public void runOpMode() throws InterruptedException
@@ -51,7 +51,7 @@ public class Auto_TripleClip extends LinearOpMode
 
     public void clipSpecimen() {
         int countsToDriveOneInch = -33; // Approximate encoder counts to drive 1 inch
-        int driveToRung = 26;
+        int driveToRung = 28;
         int driveToClip = 8;
         int backToWall = -12;
         int strafeToObserv = 40;
@@ -59,177 +59,220 @@ public class Auto_TripleClip extends LinearOpMode
         int strafeToSample = 14;
         int backSample = -63;
         int autoDelay = 500;
-        int rotateToGrab = 90;
-        int driveToGrabSampleTwo = 5;
+        int rotateToGrab = 58;
+        int driveToGrabSampleTwo = 9;
         int backUp = -12;
-        int rotateToSub = 90;
+        int rotateToSub = -58;
         int strafeToSub = 40;
         int driveToClipAgain = 20;
         int driveToClipTwo = 5;
         int strafeToThree  = 36;
+        int dontTripOnSample = 6;
 
         //first clip
+        elevator.toHighRungPosition();
+        telemetry.addLine("At high rung position");
+        telemetry.update();
+
         mecanumAuto.drive(-autoDrivePower, driveToRung * countsToDriveOneInch);
         waitForMotionToComplete();
+        telemetry.addLine("drive to rung");
+        telemetry.update();
         sleep(autoDelay);
 //
 //        mecanumAuto.strafe(autoDrivePower,strafeToCenter * countsToDriveOneInch);
 //        waitForMotionToComplete();
 //        sleep(autoDelay);
 
-        elevator.toHighRungPosition();
-        waitForElevatorToStop();
-        sleep(autoDelay);
-
         mecanumAuto.drive(-autoDrivePower, driveToClip * countsToDriveOneInch);
         waitForMotionToComplete();
+        telemetry.addLine("drive to clip");
+        telemetry.update();
         sleep(autoDelay);
 
         elevator.toHighRungHookPosition();
         waitForElevatorToStop();
+        telemetry.addLine("At high rung hook position");
+        telemetry.update();
         sleep(300);
 
         gripper.open();
+        telemetry.addLine("open gripper");
+        telemetry.update();
         sleep(autoDelay);
 
         //second clip
+        telemetry.addLine("elevator to home");
+        telemetry.update();
+        elevator.toHome();
+        telemetry.addLine("elevator at home");
+        telemetry.update();
 
         mecanumAuto.drive(-autoDrivePower, backToWall * countsToDriveOneInch);
         waitForMotionToComplete();
-        sleep(autoDelay);
-
-        elevator.toHome();
-        waitForElevatorToStop();
-        sleep(autoDelay);
+        telemetry.addLine("back up to strafe");
+        telemetry.update();
 
         // Strafe to grab sample
         mecanumAuto.strafe(-autoDrivePower, strafeToObserv * countsToDriveOneInch);
         waitForMotionToComplete();
+        telemetry.addLine("strafe from sub");
+        telemetry.update();
         sleep(autoDelay);
 
         mecanumAuto.drive(-autoDrivePower, driveToSample * countsToDriveOneInch);
         waitForMotionToComplete();
+        telemetry.addLine("drive up to sample");
+        telemetry.update();
         sleep(autoDelay);
 
         mecanumAuto.strafe(-autoDrivePower, strafeToSample * countsToDriveOneInch);
         waitForMotionToComplete();
+        telemetry.addLine("strafe to sample");
+        telemetry.update();
         sleep(autoDelay);
 
         mecanumAuto.drive(-autoDrivePower, backSample * countsToDriveOneInch);
         waitForMotionToComplete();
+        telemetry.addLine("push sample back to obs");
+        telemetry.update();
+        sleep(autoDelay);
+
+        mecanumAuto.drive( -autoDrivePower, dontTripOnSample * countsToDriveOneInch);
+        waitForMotionToComplete();
+        telemetry.addLine("drive forward so we don't get caught on sample");
+        telemetry.update();
         sleep(autoDelay);
 
         mecanumAuto.rotate(-autoDrivePower, rotateToGrab * countsToDriveOneInch);
         waitForMotionToComplete();
+        telemetry.addLine("rotate to grab specimen on wall");
+        telemetry.update();
         sleep(autoDelay);
 
         mecanumAuto.drive(-autoDrivePower, driveToGrabSampleTwo * countsToDriveOneInch);
         waitForMotionToComplete();
+        telemetry.addLine("drive forward to get sample two");
+        telemetry.update();
         sleep(autoDelay);
 
         gripper.close();
+        telemetry.addLine("close gripper to grab specimen");
+        telemetry.update();
         sleep(autoDelay);
 
         mecanumAuto.drive(-autoDrivePower, backUp * countsToDriveOneInch);
         waitForMotionToComplete();
+        telemetry.addLine("back up");
+        telemetry.update();
         sleep(autoDelay);
 
         mecanumAuto.rotate(-autoDrivePower, rotateToSub * countsToDriveOneInch);
         waitForMotionToComplete();
+        telemetry.addLine("rotate to sub");
+        telemetry.update();
         sleep(autoDelay);
+//
+//        mecanumAuto.strafe(-autoDrivePower, strafeToSub * countsToDriveOneInch);
+//        waitForMotionToComplete();
+//        telemetry.addLine("strafe to sub");
+//        telemetry.update();
+//        sleep(autoDelay);
+//
+//        mecanumAuto.drive(-autoDrivePower, driveToClipAgain * countsToDriveOneInch);
+//        waitForMotionToComplete();
+//        telemetry.addLine("drive to clip specimen 2");
+//        telemetry.update();
+//        sleep(autoDelay);
+//
+//        //clip second clip
+//        elevator.toHighRungPosition();
+//        waitForElevatorToStop();
+//        telemetry.addLine("raise elevator to high rung position");
+//        telemetry.update();
+//        sleep(autoDelay);
+//
+//        mecanumAuto.drive(-autoDrivePower, driveToClipTwo * countsToDriveOneInch);
+//        waitForMotionToComplete();
+//        sleep(autoDelay);
+//
+//        elevator.toHighRungHookPosition();
+//        waitForElevatorToStop();
+//        sleep(autoDelay);
+//
+//        gripper.open();
+//        sleep(autoDelay);
+//
+//        //third specimen
+//
+//        mecanumAuto.drive(-autoDrivePower, backToWall * countsToDriveOneInch);
+//        waitForMotionToComplete();
+//        sleep(autoDelay);
+//
+//        elevator.toHome();
+//        waitForElevatorToStop();
+//        sleep(autoDelay);
+//
+//        // Strafe to grab sample
+//        mecanumAuto.strafe(-autoDrivePower, strafeToObserv * countsToDriveOneInch);
+//        waitForMotionToComplete();
+//        sleep(autoDelay);
+//
+//        mecanumAuto.drive(-autoDrivePower, driveToSample * countsToDriveOneInch);
+//        waitForMotionToComplete();
+//        sleep(autoDelay);
+//
+//        mecanumAuto.strafe(-autoDrivePower, strafeToThree * countsToDriveOneInch);
+//        waitForMotionToComplete();
+//        sleep(autoDelay);
+//
+//        mecanumAuto.drive(-autoDrivePower, backSample * countsToDriveOneInch);
+//        waitForMotionToComplete();
+//        sleep(autoDelay);
+//
+//        mecanumAuto.rotate(-autoDrivePower, rotateToGrab * countsToDriveOneInch);
+//        waitForMotionToComplete();
+//        sleep(autoDelay);
+//
+//        mecanumAuto.drive(-autoDrivePower, driveToGrabSampleTwo * countsToDriveOneInch);
+//        waitForMotionToComplete();
+//        sleep(autoDelay);
+//
+//        gripper.close();
+//        sleep(autoDelay);
+//
+//        mecanumAuto.drive(-autoDrivePower, backUp * countsToDriveOneInch);
+//        waitForMotionToComplete();
+//        sleep(autoDelay);
+//
+//        mecanumAuto.rotate(-autoDrivePower, rotateToSub * countsToDriveOneInch);
+//        waitForMotionToComplete();
+//        sleep(autoDelay);
+//
+//        mecanumAuto.strafe(-autoDrivePower, strafeToSub * countsToDriveOneInch);
+//        waitForMotionToComplete();
+//        sleep(autoDelay);
+//
+//        mecanumAuto.drive(-autoDrivePower, driveToClipAgain * countsToDriveOneInch);
+//        waitForMotionToComplete();
+//        sleep(autoDelay);
+//
+//        elevator.toHighRungPosition();
+//        waitForElevatorToStop();
+//        sleep(autoDelay);
+//
+//        mecanumAuto.drive(-autoDrivePower, driveToClipTwo * countsToDriveOneInch);
+//        waitForMotionToComplete();
+//        sleep(autoDelay);
+//
+//        elevator.toHighRungHookPosition();
+//        waitForElevatorToStop();
+//        sleep(autoDelay);
+//
+//        gripper.open();
+//        sleep(autoDelay);
 
-        mecanumAuto.strafe(-autoDrivePower, strafeToSub * countsToDriveOneInch);
-        waitForMotionToComplete();
-        sleep(autoDelay);
-
-        mecanumAuto.drive(-autoDrivePower, driveToClipAgain * countsToDriveOneInch);
-        waitForMotionToComplete();
-        sleep(autoDelay);
-
-        //clip second clip
-        elevator.toHighRungPosition();
-        waitForElevatorToStop();
-        sleep(autoDelay);
-
-        mecanumAuto.drive(-autoDrivePower, driveToClipTwo * countsToDriveOneInch);
-        waitForMotionToComplete();
-        sleep(autoDelay);
-
-        elevator.toHighRungHookPosition();
-        waitForElevatorToStop();
-        sleep(autoDelay);
-
-        gripper.open();
-        sleep(autoDelay);
-
-        //third specimen
-
-        mecanumAuto.drive(-autoDrivePower, backToWall * countsToDriveOneInch);
-        waitForMotionToComplete();
-        sleep(autoDelay);
-
-        elevator.toHome();
-        waitForElevatorToStop();
-        sleep(autoDelay);
-
-        // Strafe to grab sample
-        mecanumAuto.strafe(-autoDrivePower, strafeToObserv * countsToDriveOneInch);
-        waitForMotionToComplete();
-        sleep(autoDelay);
-
-        mecanumAuto.drive(-autoDrivePower, driveToSample * countsToDriveOneInch);
-        waitForMotionToComplete();
-        sleep(autoDelay);
-
-        mecanumAuto.strafe(-autoDrivePower, strafeToThree * countsToDriveOneInch);
-        waitForMotionToComplete();
-        sleep(autoDelay);
-
-        mecanumAuto.drive(-autoDrivePower, backSample * countsToDriveOneInch);
-        waitForMotionToComplete();
-        sleep(autoDelay);
-
-        mecanumAuto.rotate(-autoDrivePower, rotateToGrab * countsToDriveOneInch);
-        waitForMotionToComplete();
-        sleep(autoDelay);
-
-        mecanumAuto.drive(-autoDrivePower, driveToGrabSampleTwo * countsToDriveOneInch);
-        waitForMotionToComplete();
-        sleep(autoDelay);
-
-        gripper.close();
-        sleep(autoDelay);
-
-        mecanumAuto.drive(-autoDrivePower, backUp * countsToDriveOneInch);
-        waitForMotionToComplete();
-        sleep(autoDelay);
-
-        mecanumAuto.rotate(-autoDrivePower, rotateToSub * countsToDriveOneInch);
-        waitForMotionToComplete();
-        sleep(autoDelay);
-
-        mecanumAuto.strafe(-autoDrivePower, strafeToSub * countsToDriveOneInch);
-        waitForMotionToComplete();
-        sleep(autoDelay);
-
-        mecanumAuto.drive(-autoDrivePower, driveToClipAgain * countsToDriveOneInch);
-        waitForMotionToComplete();
-        sleep(autoDelay);
-
-        elevator.toHighRungPosition();
-        waitForElevatorToStop();
-        sleep(autoDelay);
-
-        mecanumAuto.drive(-autoDrivePower, driveToClipTwo * countsToDriveOneInch);
-        waitForMotionToComplete();
-        sleep(autoDelay);
-
-        elevator.toHighRungHookPosition();
-        waitForElevatorToStop();
-        sleep(autoDelay);
-
-        gripper.open();
-        sleep(autoDelay);
+        telemetry.addLine("End of Auto");
     }
 
     // Drive until one of the 4 wheels has reached it's target position. We only wait for one

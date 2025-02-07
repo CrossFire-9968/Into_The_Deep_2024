@@ -20,7 +20,7 @@ public class Elevator
    private static final int lowRungPosition =440;
    private static final int highRungPosition = 1325;
    private static final int highRungHookPosition = 975;
-   private static  int homePosition = 0;
+   private static  int homePosition = 5;
 
    // Motor PIDF coefficients, USE CAUTION. These values change how the motor
    // responds when commanded to an encoder position.
@@ -34,7 +34,7 @@ public class Elevator
    public void init(HardwareMap hwMap)
    {
       ElevatorMotor = hwMap.get(DcMotor.class, "ElevatorMotor");
-      ElevatorMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+      ElevatorMotor.setDirection(DcMotorSimple.Direction.REVERSE);
       ElevatorMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
       ElevatorMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
