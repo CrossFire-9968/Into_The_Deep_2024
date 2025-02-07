@@ -14,7 +14,7 @@ public class Auto_TripleClip extends LinearOpMode
     public MecanumAuto mecanumAuto = new MecanumAuto();
     private ElapsedTime cameraTimer = new ElapsedTime();
     private long autoStateDelay = 300;
-    private double autoDrivePower = 0.6;
+    private double autoDrivePower = 0.8;
 
     @Override
     public void runOpMode() throws InterruptedException
@@ -54,18 +54,18 @@ public class Auto_TripleClip extends LinearOpMode
         int driveToRung = 28;
         int driveToClip = 8;
         int backToWall = -12;
-        int strafeToObserv = 40;
+        int strafeToObserv = 43;
         int driveToSample = 45;
         int strafeToSample = 14;
         int backSample = -63;
         int autoDelay = 500;
         int rotateToGrab = 58;
-        int driveToGrabSampleTwo = 9;
+        int driveToGrabSampleTwo = 10;
         int backUp = -12;
-        int rotateToSub = -58;
-        int strafeToSub = 40;
-        int driveToClipAgain = 20;
-        int driveToClipTwo = 5;
+        int rotateToSub = -57;
+        int strafeToSub = -65;
+        int driveToClipAgain = 12;
+        int driveToClipTwo = 4;
         int strafeToThree  = 36;
         int dontTripOnSample = 6;
 
@@ -160,6 +160,9 @@ public class Auto_TripleClip extends LinearOpMode
         telemetry.addLine("close gripper to grab specimen");
         telemetry.update();
         sleep(autoDelay);
+        elevator.toLowRungPosition();
+        waitForElevatorToStop();
+
 
         mecanumAuto.drive(-autoDrivePower, backUp * countsToDriveOneInch);
         waitForMotionToComplete();
@@ -167,41 +170,45 @@ public class Auto_TripleClip extends LinearOpMode
         telemetry.update();
         sleep(autoDelay);
 
+        elevator.toHome();
+
         mecanumAuto.rotate(-autoDrivePower, rotateToSub * countsToDriveOneInch);
         waitForMotionToComplete();
         telemetry.addLine("rotate to sub");
         telemetry.update();
         sleep(autoDelay);
-//
-//        mecanumAuto.strafe(-autoDrivePower, strafeToSub * countsToDriveOneInch);
-//        waitForMotionToComplete();
-//        telemetry.addLine("strafe to sub");
-//        telemetry.update();
-//        sleep(autoDelay);
-//
-//        mecanumAuto.drive(-autoDrivePower, driveToClipAgain * countsToDriveOneInch);
-//        waitForMotionToComplete();
-//        telemetry.addLine("drive to clip specimen 2");
-//        telemetry.update();
-//        sleep(autoDelay);
-//
-//        //clip second clip
-//        elevator.toHighRungPosition();
-//        waitForElevatorToStop();
-//        telemetry.addLine("raise elevator to high rung position");
-//        telemetry.update();
-//        sleep(autoDelay);
-//
-//        mecanumAuto.drive(-autoDrivePower, driveToClipTwo * countsToDriveOneInch);
-//        waitForMotionToComplete();
-//        sleep(autoDelay);
-//
-//        elevator.toHighRungHookPosition();
-//        waitForElevatorToStop();
-//        sleep(autoDelay);
-//
-//        gripper.open();
-//        sleep(autoDelay);
+
+
+
+        mecanumAuto.strafe(-autoDrivePower, strafeToSub * countsToDriveOneInch);
+        waitForMotionToComplete();
+        telemetry.addLine("strafe to sub");
+        telemetry.update();
+        sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, driveToClipAgain * countsToDriveOneInch);
+        waitForMotionToComplete();
+        telemetry.addLine("drive to clip specimen 2");
+        telemetry.update();
+        sleep(autoDelay);
+
+        //clip second clip
+        elevator.toHighRungPosition();
+        waitForElevatorToStop();
+        telemetry.addLine("raise elevator to high rung position");
+        telemetry.update();
+        sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, driveToClipTwo * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        elevator.toHighRungHookPosition();
+        waitForElevatorToStop();
+        sleep(autoDelay);
+
+        gripper.open();
+        sleep(autoDelay);
 //
 //        //third specimen
 //
