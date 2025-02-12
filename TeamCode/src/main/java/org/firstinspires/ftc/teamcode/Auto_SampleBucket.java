@@ -50,21 +50,22 @@ public class Auto_SampleBucket extends LinearOpMode {
     public void bucketSample(){
         int countsToDriveOneInch = -33; // Approximate encoder counts to drive 1 inch
         int autoDelay = 250;
-        int driveToBucket = 36;
+        int driveToBucket = 18;
         int driveToDump = 6;
         int strafeToGrab = 24;
-        int rotateToSample = -45;
+        int rotateToSample = 45;
         int rotateToBucket = 90;
         int driveNextSample = 24;
         int backUp = -12;
-        int rotateToDump = 45;
+        int strafeToBucket = 30;
+        int backUpBucket = -5;
 
         //Dump the first sample
         mecanumAuto.drive(-autoDrivePower, driveToBucket * countsToDriveOneInch);
         waitForMotionToComplete();
         sleep(autoDelay);
 
-        elevator.toHighBucket();
+        elevator.toLowBucket();
         waitForElevatorToStop();
         sleep(300);
 
@@ -106,15 +107,11 @@ public class Auto_SampleBucket extends LinearOpMode {
         waitForMotionToComplete();
         sleep(autoDelay);
 
-        mecanumAuto.drive(-autoDrivePower, driveNextSample * countsToDriveOneInch);
+        mecanumAuto.strafe(-autoDrivePower, strafeToBucket * countsToDriveOneInch);
         waitForMotionToComplete();
         sleep(autoDelay);
 
-        mecanumAuto.rotate(-autoDrivePower, rotateToDump * countsToDriveOneInch);
-        waitForMotionToComplete();
-        sleep(autoDelay);
-
-        elevator.toHighBucket();
+        elevator.toLowBucket();
         waitForElevatorToStop();
         sleep(300);
 
@@ -125,8 +122,57 @@ public class Auto_SampleBucket extends LinearOpMode {
         gripper.open();
         sleep(autoDelay);
 
-        
+        mecanumAuto.drive(-autoDrivePower, backUpBucket * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
 
+        elevator.toHome();
+
+        mecanumAuto.rotate(-autoDrivePower, rotateToSample * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, driveNextSample * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        pivot.pivot_Down();
+        sleep(autoDelay);
+
+        gripper.close();
+        sleep(autoDelay);
+
+        pivot.pivot_Up();
+        sleep(autoDelay);
+
+        mecanumAuto.rotate(-autoDrivePower, rotateToBucket * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.strafe(-autoDrivePower, strafeToBucket * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        elevator.toLowBucket();
+        waitForElevatorToStop();
+        sleep(300);
+
+        mecanumAuto.drive(-autoDrivePower, driveToDump *countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        gripper.open();
+        sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, backUp *countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        elevator.toHome();
+
+        mecanumAuto.rotate(-autoDrivePower, rotateToSample * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
     }
     public void waitForMotionToComplete() {
 
