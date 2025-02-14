@@ -50,13 +50,14 @@ public class Auto_SampleBucket extends LinearOpMode {
     public void bucketSample(){
         int countsToDriveOneInch = -33; // Approximate encoder counts to drive 1 inch
         int autoDelay = 250;
-        int driveToBucket = 18;
+        int driveToBucket = 16;
         int driveToDump = 6;
-        int strafeToGrab = 24;
-        int rotateToSample = 45;
-        int rotateToBucket = 90;
-        int driveNextSample = 24;
-        int backUp = -12;
+        int strafeToGrab = 37;
+        int rotateToSample = 27;
+        int rotateToSampleTwo = 45;
+        int rotateToBucket = 70;
+        int driveNextSample = 14;
+        int backUp = -8;
         int strafeToBucket = 30;
         int backUpBucket = -5;
 
@@ -107,7 +108,11 @@ public class Auto_SampleBucket extends LinearOpMode {
         waitForMotionToComplete();
         sleep(autoDelay);
 
-        mecanumAuto.strafe(-autoDrivePower, strafeToBucket * countsToDriveOneInch);
+        mecanumAuto.drive(-autoDrivePower, driveToBucket * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.strafe(-autoDrivePower, 2 *countsToDriveOneInch);
         waitForMotionToComplete();
         sleep(autoDelay);
 
@@ -128,7 +133,7 @@ public class Auto_SampleBucket extends LinearOpMode {
 
         elevator.toHome();
 
-        mecanumAuto.rotate(-autoDrivePower, rotateToSample * countsToDriveOneInch);
+        mecanumAuto.rotate(-autoDrivePower, rotateToSampleTwo * countsToDriveOneInch);
         waitForMotionToComplete();
         sleep(autoDelay);
 
@@ -149,7 +154,11 @@ public class Auto_SampleBucket extends LinearOpMode {
         waitForMotionToComplete();
         sleep(autoDelay);
 
-        mecanumAuto.strafe(-autoDrivePower, strafeToBucket * countsToDriveOneInch);
+        mecanumAuto.strafe(-autoDrivePower, -8 * countsToDriveOneInch);
+        waitForMotionToComplete();
+        sleep(autoDelay);
+
+        mecanumAuto.drive(-autoDrivePower, 14 * countsToDriveOneInch);
         waitForMotionToComplete();
         sleep(autoDelay);
 
@@ -174,6 +183,7 @@ public class Auto_SampleBucket extends LinearOpMode {
         waitForMotionToComplete();
         sleep(autoDelay);
     }
+
     public void waitForMotionToComplete() {
 
         // Only wait until one of the wheels reaches position. At that point, stop all the motors
