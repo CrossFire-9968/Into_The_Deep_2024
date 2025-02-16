@@ -53,10 +53,10 @@ public class Auto_SampleBucket extends LinearOpMode {
         int driveToBucket = 16;
         int driveToDump = 6;
         int strafeToGrab = 37;
-        int rotateToSample = 27;
+        int rotateToSample = 28;
         int rotateToSampleTwo = 45;
         int rotateToBucket = 70;
-        int driveNextSample = 14;
+        int driveNextSample = 13;
         int backUp = -8;
         int strafeToBucket = 30;
         int backUpBucket = -5;
@@ -77,7 +77,7 @@ public class Auto_SampleBucket extends LinearOpMode {
         gripper.open();
         sleep(autoDelay);
 
-        //Get next sample
+        //Get 2nd sample
         mecanumAuto.drive(-autoDrivePower, backUp * countsToDriveOneInch);
         waitForMotionToComplete();
         sleep(autoDelay);
@@ -103,7 +103,7 @@ public class Auto_SampleBucket extends LinearOpMode {
         pivot.pivot_Up();
         sleep(autoDelay);
 
-        //Dump next sample
+        //Dump 2nd sample
         mecanumAuto.rotate(-autoDrivePower, rotateToBucket * countsToDriveOneInch);
         waitForMotionToComplete();
         sleep(autoDelay);
@@ -112,7 +112,7 @@ public class Auto_SampleBucket extends LinearOpMode {
         waitForMotionToComplete();
         sleep(autoDelay);
 
-        mecanumAuto.strafe(-autoDrivePower, 2 *countsToDriveOneInch);
+        mecanumAuto.strafe(-autoDrivePower, -4 *countsToDriveOneInch);
         waitForMotionToComplete();
         sleep(autoDelay);
 
@@ -133,9 +133,14 @@ public class Auto_SampleBucket extends LinearOpMode {
 
         elevator.toHome();
 
+        // snatch 3rd sample
         mecanumAuto.rotate(-autoDrivePower, rotateToSampleTwo * countsToDriveOneInch);
         waitForMotionToComplete();
         sleep(autoDelay);
+
+//        mecanumAuto.strafe(-autoDrivePower, 7 * countsToDriveOneInch);
+//        waitForMotionToComplete();
+//        sleep(autoDelay);
 
         mecanumAuto.drive(-autoDrivePower, driveNextSample * countsToDriveOneInch);
         waitForMotionToComplete();
@@ -150,15 +155,16 @@ public class Auto_SampleBucket extends LinearOpMode {
         pivot.pivot_Up();
         sleep(autoDelay);
 
+        // dump 3rd sample
         mecanumAuto.rotate(-autoDrivePower, rotateToBucket * countsToDriveOneInch);
         waitForMotionToComplete();
         sleep(autoDelay);
 
-        mecanumAuto.strafe(-autoDrivePower, -8 * countsToDriveOneInch);
+        mecanumAuto.strafe(-autoDrivePower, -16 * countsToDriveOneInch);
         waitForMotionToComplete();
         sleep(autoDelay);
 
-        mecanumAuto.drive(-autoDrivePower, 14 * countsToDriveOneInch);
+        mecanumAuto.drive(-autoDrivePower, 10 * countsToDriveOneInch);
         waitForMotionToComplete();
         sleep(autoDelay);
 
@@ -179,7 +185,7 @@ public class Auto_SampleBucket extends LinearOpMode {
 
         elevator.toHome();
 
-        mecanumAuto.rotate(-autoDrivePower, rotateToSample * countsToDriveOneInch);
+        mecanumAuto.rotate(-autoDrivePower, 75 * countsToDriveOneInch);
         waitForMotionToComplete();
         sleep(autoDelay);
     }
